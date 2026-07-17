@@ -1,0 +1,6 @@
+[*.{kt,kts}]
+# Use official Kotlin code style
+ktlint_code_style = ktlint_official
+
+# Do not apply the lowercase function-naming rule to functions annotated with @Composable
+ktlint_function_naming_ignore_when_annotated_with = Composable

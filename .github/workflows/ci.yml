@@ -1,13 +1,8 @@
 name: Joyvie Kotlin Multiplatform CI
 
 on:
-  push:
-    branches:
-      - main
-      - development
   pull_request:
     branches:
-      - main
       - development
 
 jobs:

@@ -1,7 +1,3 @@
-rootProject.name = "JoyvieKMP"
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     repositories {
         google {
@@ -27,15 +23,11 @@ dependencyResolutionManagement {
         }
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
 
-includeBuild("build-logic")
-
-include(":androidApp")
-include(":composeApp")
-include(":core:designsystem")
-include(":core:network")
-include(":core:model")
-include(":features:auth:domain")
-include(":features:auth:data")
-include(":features:auth:presentation")
+rootProject.name = "build-logic"

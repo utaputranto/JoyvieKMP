@@ -11,6 +11,7 @@ dependencies {
     compileOnly(libs.kotlin.serialization.plugin)
     compileOnly(libs.compose.gradle.plugin)
     implementation(libs.spotless.gradle.plugin)
+    implementation(libs.sonarqube.gradle.plugin)
 }
 
 gradlePlugin {
@@ -26,6 +27,10 @@ gradlePlugin {
         register("spotless") {
             id = "joyvie.spotless"
             implementationClass = "SpotlessConventionPlugin"
+        }
+        register("sonar") {
+            id = "joyvie.sonar"
+            implementationClass = "SonarConventionPlugin"
         }
         register("featureApi") {
             id = "joyvie.feature.api"

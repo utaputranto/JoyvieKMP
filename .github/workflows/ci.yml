@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew spotlessCheck
 
       - name: Run Unit Tests
-        run: ./gradlew :shared:testAndroidHostTest
+        run: ./gradlew test
 
       - name: Assemble Debug Build
         run: ./gradlew assembleDebug

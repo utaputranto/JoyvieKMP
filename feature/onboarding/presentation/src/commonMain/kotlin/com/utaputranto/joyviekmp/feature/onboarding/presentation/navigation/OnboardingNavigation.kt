@@ -1,0 +1,36 @@
+package com.utaputranto.joyviekmp.feature.onboarding.presentation.navigation
+
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import androidx.navigation.navigation
+import com.utaputranto.joyviekmp.feature.auth.api.navigation.navigateToAuth
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingRoute
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingScreen1Route
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingScreen2Route
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingScreen1
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingScreen2
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingViewModel
+import org.koin.compose.viewmodel.koinViewModel
+
+fun NavGraphBuilder.onboardingGraph(navController: NavController) {
+    navigation<OnboardingRoute>(startDestination = OnboardingScreen1Route) {
+        composable<OnboardingScreen1Route> {
+            val viewModel = koinViewModel<OnboardingViewModel>()
+            OnboardingScreen1(
+                deviceInfo = viewModel.deviceInfo,
+                onNext = { navController.navigate(OnboardingScreen2Route) },
+            )
+        }
+        composable<OnboardingScreen2Route> {
+            val viewModel = koinViewModel<OnboardingViewModel>()
+            OnboardingScreen2(
+                onFinished = {
+                    viewModel.finishOnboarding {
+                        navController.navigateToAuth()
+                    }
+                },
+            )
+        }
+    }
+}

@@ -1,5 +1,7 @@
 rootProject.name = "JoyvieKMP"
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google {
@@ -27,5 +29,19 @@ dependencyResolutionManagement {
     }
 }
 
+includeBuild("build-logic")
+
 include(":androidApp")
-include(":shared")
+include(":composeApp")
+include(":core:designsystem")
+include(":core:network")
+include(":core:model")
+include(":core:platform")
+include(":feature:auth:api")
+include(":feature:auth:domain")
+include(":feature:auth:data")
+include(":feature:auth:presentation")
+include(":feature:onboarding:api")
+include(":feature:onboarding:domain")
+include(":feature:onboarding:data")
+include(":feature:onboarding:presentation")

@@ -6,18 +6,6 @@ plugins {
     alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
-    alias(libs.plugins.spotless)
-}
-
-spotless {
-    kotlin {
-        target("**/*.kt")
-        targetExclude("**/build/**/*.kt", "**/build/generated/**/*.kt")
-        ktlint("1.0.1")
-    }
-    kotlinGradle {
-        target("**/*.gradle.kts")
-        targetExclude("**/build/**/*.gradle.kts")
-        ktlint("1.0.1")
-    }
+    alias(libs.plugins.kotlinSerialization) apply false
+    alias(libs.plugins.joyvie.spotless)
 }

@@ -3,10 +3,6 @@ plugins {
 }
 
 kotlin {
-    android {
-        namespace = "com.joyvie.core.network"
-    }
-
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.model)

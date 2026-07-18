@@ -1,10 +1,12 @@
 package com.utaputranto.joyviekmp.feature.onboarding.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +14,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.utaputranto.joyviekmp.core.designsystem.atom.JoyvieButton
+import com.utaputranto.joyviekmp.core.designsystem.atom.JoyvieButtonStyle
+import com.utaputranto.joyviekmp.core.designsystem.theme.JoyvieTheme
 import com.utaputranto.joyviekmp.core.platform.AppLogger
 import com.utaputranto.joyviekmp.core.platform.DeviceInfo
 
@@ -29,22 +34,38 @@ fun OnboardingScreen1(
     }
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(JoyvieTheme.colors.background)
+                .padding(JoyvieTheme.dimens.medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Welcome to Onboarding - Screen 1")
-        Text("Running on ${deviceInfo.osName} ${deviceInfo.osVersion}")
-        Text(if (deviceInfo.isDebug) "Mode: Debug" else "Mode: Release")
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
+        Text(
+            text = "Welcome to Joyvie",
+            style = JoyvieTheme.typography.headline,
+            color = JoyvieTheme.colors.onBackground,
+        )
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Text(
+            text = "Running on ${deviceInfo.osName} ${deviceInfo.osVersion}",
+            style = JoyvieTheme.typography.body,
+            color = JoyvieTheme.colors.onSurfaceVariant,
+        )
+        Text(
+            text = if (deviceInfo.isDebug) "Mode: Debug" else "Mode: Release",
+            style = JoyvieTheme.typography.label,
+            color = if (deviceInfo.isDebug) JoyvieTheme.colors.warning else JoyvieTheme.colors.success,
+        )
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.large))
+        JoyvieButton(
+            text = "Next Screen",
             onClick = {
                 AppLogger.d(TAG, "Next button clicked")
                 onNext()
             },
-        ) {
-            Text("Next Screen")
-        }
+        )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
@@ -63,14 +84,36 @@ fun OnboardingScreen2(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(JoyvieTheme.colors.background)
+                .padding(JoyvieTheme.dimens.medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Onboarding Complete - Screen 2")
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = onFinished) {
-            Text("Finish Onboarding")
-        }
+        Text(
+            text = "You're all set!",
+            style = JoyvieTheme.typography.headline,
+            color = JoyvieTheme.colors.onBackground,
+        )
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Text(
+            text = "Finish onboarding to start using the app.",
+            style = JoyvieTheme.typography.body,
+            color = JoyvieTheme.colors.onSurfaceVariant,
+        )
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.large))
+        JoyvieButton(
+            text = "Finish Onboarding",
+            onClick = onFinished,
+        )
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        JoyvieButton(
+            text = "Back",
+            onClick = {},
+            style = JoyvieButtonStyle.Secondary,
+            enabled = false,
+        )
     }
 }

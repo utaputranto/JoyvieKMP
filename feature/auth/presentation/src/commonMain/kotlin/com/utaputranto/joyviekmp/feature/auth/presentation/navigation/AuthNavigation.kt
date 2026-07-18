@@ -22,6 +22,8 @@ fun NavGraphBuilder.authGraph(navController: NavController) {
             val uiState by viewModel.uiState.collectAsState()
             AuthScreen1(
                 uiState = uiState,
+                onEmailChanged = viewModel::onEmailChanged,
+                onPasswordChanged = viewModel::onPasswordChanged,
                 onLogin = viewModel::onLoginClicked,
                 onNext = { navController.navigate(AuthScreen2Route) },
             )

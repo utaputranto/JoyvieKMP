@@ -1,4 +1,5 @@
 [versions]
+coil3 = "3.0.4"
 agp = "9.2.1"
 android-compileSdk = "37"
 android-minSdk = "24"
@@ -28,6 +29,8 @@ firebaseBom = "34.16.0"
 
 
 [libraries]
+coil3-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
+coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }

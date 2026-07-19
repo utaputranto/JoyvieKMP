@@ -22,6 +22,8 @@ class KmpFeatureConventionPlugin : Plugin<Project> {
                     implementation(libsExtension.findLibrary("compose-ui").get())
                     implementation(libsExtension.findLibrary("compose-components-resources").get())
                     implementation(libsExtension.findLibrary("compose-uiToolingPreview").get())
+                    implementation(libsExtension.findLibrary("coil3-compose").get())
+                    implementation(libsExtension.findLibrary("coil3-network-ktor3").get())
                 }
                 // Renderer used by Android Studio to display @Preview composables;
                 // without it previews in this module never render.

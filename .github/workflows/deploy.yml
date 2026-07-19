@@ -33,7 +33,7 @@ jobs:
         run: ./gradlew :androidApp:assembleDebug
 
       - name: Upload to Firebase App Distribution
-        uses: w9jds/firebase-action@v2.2.0
+        uses: w9jds/firebase-action@v15.23.0
         with:
           args: appdistribution:distribute androidApp/build/outputs/apk/debug/androidApp-debug.apk --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} --groups "tester-dev" --release-notes "${{ github.event.inputs.release_notes || 'Automatic deployment from GitHub Actions' }}"
         env:

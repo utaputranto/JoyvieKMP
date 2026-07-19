@@ -3,7 +3,7 @@ name: Deploy Android to Firebase App Distribution
 on:
   pull_request:
     branches:
-      - dev
+      - development
   workflow_dispatch:
     inputs:
       release_notes:
@@ -32,9 +32,12 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew :androidApp:assembleDebug
 
+      - name: Create Release Notes File
+        run: echo "${{ github.event.inputs.release_notes || 'Automatic deployment from GitHub Actions' }}" > release-notes.txt
+
       - name: Upload to Firebase App Distribution
-        uses: w9jds/firebase-action@v2.2.0
+        uses: w9jds/firebase-action@v15.23.0
         with:
-          args: appdistribution:distribute androidApp/build/outputs/apk/debug/androidApp-debug.apk --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} --groups "tester-dev" --release-notes "${{ github.event.inputs.release_notes }}"
+          args: appdistribution:distribute androidApp/build/outputs/apk/debug/androidApp-debug.apk --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} --groups "tester-dev" --release-notes-file release-notes.txt
         env:
           GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

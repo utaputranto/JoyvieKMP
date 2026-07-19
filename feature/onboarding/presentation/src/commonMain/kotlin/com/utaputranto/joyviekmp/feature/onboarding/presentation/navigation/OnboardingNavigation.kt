@@ -20,6 +20,7 @@ fun NavGraphBuilder.onboardingGraph(navController: NavController) {
             OnboardingScreen1(
                 deviceInfo = viewModel.deviceInfo,
                 onNext = { navController.navigate(OnboardingScreen2Route) },
+                onTestEndpoint = { viewModel.testHitEndpoint() },
             )
         }
         composable<OnboardingScreen2Route> {

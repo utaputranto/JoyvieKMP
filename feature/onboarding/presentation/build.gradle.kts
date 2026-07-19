@@ -7,6 +7,7 @@ kotlin {
         commonMain.dependencies {
             // Cross-feature: navigate forward to auth
             implementation(projects.feature.auth.api)
+            implementation(projects.core.network)
         }
     }
 }

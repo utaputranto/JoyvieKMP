@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.compose.gradle.plugin)
     implementation(libs.spotless.gradle.plugin)
     implementation(libs.sonarqube.gradle.plugin)
+    implementation(libs.google.services.gradle.plugin)
 }
 
 gradlePlugin {
@@ -55,6 +56,10 @@ gradlePlugin {
         register("featurePresentation") {
             id = "joyvie.feature.presentation"
             implementationClass = "FeaturePresentationConventionPlugin"
+        }
+        register("androidFirebase") {
+            id = "joyvie.android.firebase"
+            implementationClass = "AndroidFirebaseConventionPlugin"
         }
     }
 }

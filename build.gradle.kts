@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.joyvie.spotless)
     alias(libs.plugins.joyvie.sonar)
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.googleServices) apply false
 }

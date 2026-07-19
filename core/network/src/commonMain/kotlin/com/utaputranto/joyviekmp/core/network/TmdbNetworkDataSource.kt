@@ -8,7 +8,7 @@ import io.ktor.client.request.parameter
 import kotlin.coroutines.cancellation.CancellationException
 
 class TmdbNetworkDataSource(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) {
     suspend fun getPopularMovies(): Result<MovieResponseDto> {
         return try {
@@ -22,9 +22,10 @@ class TmdbNetworkDataSource(
 
     suspend fun searchMovies(query: String): Result<MovieResponseDto> {
         return try {
-            val response = httpClient.get("3/search/movie") {
-                parameter("query", query)
-            }
+            val response =
+                httpClient.get("3/search/movie") {
+                    parameter("query", query)
+                }
             Result.success(response.body())
         } catch (e: Exception) {
             if (e is CancellationException) throw e

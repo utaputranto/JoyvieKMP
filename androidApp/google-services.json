@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "531116178792",
+    "project_id": "joyviekmp",
+    "storage_bucket": "joyviekmp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531116178792:android:3a656e2e3f5c0811d52add",
+        "android_client_info": {
+          "package_name": "com.utaputranto.joyviekmp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvWPKaepTXQLhpBaVKc5-Iksk6YD5Q3dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531116178792:android:ad204598a427be3ed52add",
+        "android_client_info": {
+          "package_name": "com.utaputranto.joyviekmp.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvWPKaepTXQLhpBaVKc5-Iksk6YD5Q3dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

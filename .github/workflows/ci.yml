@@ -39,14 +39,5 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run Spotless Check
-        run: ./gradlew spotlessCheck
-
-      - name: Run Unit Tests
-        run: ./gradlew test
-
-      - name: Assemble Debug Build
-        run: ./gradlew assembleDebug
-
-      - name: SonarQube Analysis
-        run: ./gradlew sonar
+      - name: Run CI Tasks (Spotless, Test, Assemble, Sonar)
+        run: ./gradlew spotlessCheck test assembleDebug sonar --continue

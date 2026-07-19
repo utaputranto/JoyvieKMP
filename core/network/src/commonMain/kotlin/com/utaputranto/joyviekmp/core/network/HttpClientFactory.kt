@@ -104,7 +104,7 @@ class TmdbHttpClientFactory(
                 ServerException(
                     statusCode,
                     "Server Error: $serverMessage",
-                    cause
+                    cause,
                 )
             }
 

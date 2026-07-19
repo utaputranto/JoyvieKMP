@@ -3,7 +3,7 @@ name: Deploy Android to Firebase App Distribution
 on:
   pull_request:
     branches:
-      - dev
+      - development
   workflow_dispatch:
     inputs:
       release_notes:

@@ -15,6 +15,7 @@ jobs:
       SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
       SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
       SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
 
     steps:
       - name: Checkout Repository

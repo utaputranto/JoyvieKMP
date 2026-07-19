@@ -2,15 +2,15 @@ package com.utaputranto.joyviekmp.feature.onboarding.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utaputranto.joyviekmp.core.network.TmdbNetworkDataSource
-import com.utaputranto.joyviekmp.core.network.createHttpClient
 import com.utaputranto.joyviekmp.core.platform.AppLogger
 import com.utaputranto.joyviekmp.core.platform.DeviceInfo
 import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.CompleteOnboardingUseCase
+import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.GetPopularMoviesUseCase
 import kotlinx.coroutines.launch
 
 class OnboardingViewModel(
     private val completeOnboarding: CompleteOnboardingUseCase,
+    private val getPopularMovies: GetPopularMoviesUseCase,
     val deviceInfo: DeviceInfo,
 ) : ViewModel() {
     fun finishOnboarding(onFinished: () -> Unit) {
@@ -23,9 +23,7 @@ class OnboardingViewModel(
 
     fun testHitEndpoint() {
         viewModelScope.launch {
-            val httpClient = createHttpClient()
-            val tmdbNetworkDataSource = TmdbNetworkDataSource(httpClient)
-            val result = tmdbNetworkDataSource.getPopularMovies()
+            val result = getPopularMovies()
             result.onSuccess {
                 AppLogger.i(TAG, "Successfully fetched popular movies: $it")
             }.onFailure {

@@ -23,7 +23,7 @@ fun createHttpClient(): HttpClient {
             url {
                 parameters.append("language", "en-US")
             }
-            header(HttpHeaders.Authorization, "Bearer TODO(\"Provide TMDB Token\")")
+            header(HttpHeaders.Authorization, "Bearer ${BuildConfig.TMDB_TOKEN}")
         }
     }
 }

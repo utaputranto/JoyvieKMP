@@ -1,5 +1,6 @@
 package com.utaputranto.joyviekmp.di
 
+import com.utaputranto.joyviekmp.core.network.di.networkModule
 import com.utaputranto.joyviekmp.core.platform.getDeviceInfo
 import com.utaputranto.joyviekmp.feature.auth.data.di.authDataModule
 import com.utaputranto.joyviekmp.feature.auth.presentation.di.authPresentationModule
@@ -16,6 +17,7 @@ val platformModule: Module =
 val appModules: List<Module> =
     listOf(
         platformModule,
+        networkModule,
         onboardingDataModule,
         onboardingPresentationModule,
         authDataModule,

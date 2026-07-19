@@ -8,7 +8,7 @@ import io.ktor.client.request.parameter
 
 class TmdbApiService(private val client: TmdbHttpClientFactory) {
     suspend fun getPopularMovies(): MovieResponseDto {
-        return client.build().get("3/movie/popularr").body()
+        return client.build().get("3/movie/popular").body()
     }
 
     suspend fun searchMovies(query: String): MovieResponseDto {

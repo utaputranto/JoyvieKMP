@@ -44,47 +44,7 @@ class TmdbHttpClientFactory(
             HttpResponseValidator {
                 handleResponseExceptionWithRequest { cause, _ ->
                     if (cause is ResponseException) {
-                        val response = cause.response
-                        val statusCode = response.status.value
-
-                        val errorDto =
-                            try {
-                                response.body<TmdbErrorDto>()
-                            } catch (_: Exception) {
-                                null
-                            }
-
-                        val serverMessage =
-                            errorDto?.statusMessage
-                                ?: "HTTP request failed with status code $statusCode"
-
-                        val apiException =
-                            when (statusCode) {
-                                HttpStatusCode.Unauthorized.value ->
-                                    UnauthorizedException(
-                                        serverMessage,
-                                        cause,
-                                    )
-
-                                HttpStatusCode.Forbidden.value ->
-                                    ForbiddenException(
-                                        "Forbidden access: $serverMessage",
-                                        cause,
-                                    )
-
-                                HttpStatusCode.NotFound.value ->
-                                    NotFoundException(
-                                        "Endpoint not found: $serverMessage",
-                                        cause,
-                                    )
-
-                                in HttpStatusCode.InternalServerError.value..HttpStatusCode.GatewayTimeout.value -> {
-                                    ServerException(statusCode, "Server Error: $serverMessage", cause)
-                                }
-
-                                else -> ApiException(statusCode, serverMessage, cause)
-                            }
-                        throw apiException
+                        throw handleResponseException(cause)
                     }
                 }
             }
@@ -103,6 +63,52 @@ class TmdbHttpClientFactory(
             HttpClient(engine, clientBlock)
         } else {
             HttpClient(clientBlock)
+        }
+    }
+
+    private suspend fun handleResponseException(cause: ResponseException): Throwable {
+        val response = cause.response
+        val statusCode = response.status.value
+
+        val errorDto =
+            try {
+                response.body<TmdbErrorDto>()
+            } catch (_: Exception) {
+                null
+            }
+
+        val serverMessage =
+            errorDto?.statusMessage
+                ?: "HTTP request failed with status code $statusCode"
+
+        return when (statusCode) {
+            HttpStatusCode.Unauthorized.value ->
+                UnauthorizedException(
+                    serverMessage,
+                    cause,
+                )
+
+            HttpStatusCode.Forbidden.value ->
+                ForbiddenException(
+                    "Forbidden access: $serverMessage",
+                    cause,
+                )
+
+            HttpStatusCode.NotFound.value ->
+                NotFoundException(
+                    "Endpoint not found: $serverMessage",
+                    cause,
+                )
+
+            in HttpStatusCode.InternalServerError.value..HttpStatusCode.GatewayTimeout.value -> {
+                ServerException(
+                    statusCode,
+                    "Server Error: $serverMessage",
+                    cause
+                )
+            }
+
+            else -> ApiException(statusCode, serverMessage, cause)
         }
     }
 }

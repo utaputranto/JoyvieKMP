@@ -1,8 +1,8 @@
 package com.utaputranto.joyviekmp.feature.onboarding.data.repository
 
 import com.utaputranto.joyviekmp.core.model.Movie
-import com.utaputranto.joyviekmp.core.network.TmdbNetworkDataSource
 import com.utaputranto.joyviekmp.feature.onboarding.data.mapper.toDomain
+import com.utaputranto.joyviekmp.feature.onboarding.data.remote.TmdbNetworkDataSource
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(

@@ -56,18 +56,19 @@ kotlin {
         commonMain {
             kotlin.srcDir(generateBuildConfig)
             dependencies {
-                implementation(projects.core.model)
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.serialization.kotlinx.json)
-                implementation(libs.koin.core)
+                api(project(":core:platform"))
+                api(projects.core.model)
+                api(libs.ktor.client.core)
+                api(libs.ktor.client.content.negotiation)
+                api(libs.ktor.serialization.kotlinx.json)
+                api(libs.koin.core)
             }
         }
         androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
+            api(libs.ktor.client.okhttp)
         }
         iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
+            api(libs.ktor.client.darwin)
         }
     }
 }

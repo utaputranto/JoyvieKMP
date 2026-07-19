@@ -28,7 +28,13 @@ class ComposeAppConventionPlugin : Plugin<Project> {
                 sourceSets.getByName("commonMain").dependencies {
                     rootProject.subprojects
                         .filter { it.buildFile.exists() }
-                        .filter { it.path.startsWith(":feature:") || it.path.startsWith(":core:") }
+                        .filter { subproject ->
+                            val path = subproject.path
+                            path.startsWith(":core:") ||
+                                path.endsWith(":presentation") ||
+                                path.endsWith(":data") ||
+                                path.endsWith(":api")
+                        }
                         .forEach { implementation(project(it.path)) }
 
                     implementation(libsExtension.findLibrary("androidx-navigation-compose").get())

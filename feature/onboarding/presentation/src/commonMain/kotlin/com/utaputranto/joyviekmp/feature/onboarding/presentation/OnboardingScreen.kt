@@ -21,6 +21,7 @@ private const val TAG = "OnboardingScreen1"
 fun OnboardingScreen1(
     deviceInfo: DeviceInfo,
     onNext: () -> Unit,
+    onTestEndpoint: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LaunchedEffect(Unit) {
@@ -43,6 +44,15 @@ fun OnboardingScreen1(
             },
         ) {
             Text("Next Screen")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                AppLogger.d(TAG, "Test API endpoint button clicked")
+                onTestEndpoint()
+            },
+        ) {
+            Text("Test Hit API Endpoint")
         }
     }
 }

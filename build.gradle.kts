@@ -9,4 +9,5 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.joyvie.spotless)
     alias(libs.plugins.joyvie.sonar)
+    alias(libs.plugins.android.library) apply false
 }

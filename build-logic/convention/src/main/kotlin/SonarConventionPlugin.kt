@@ -17,6 +17,7 @@ class SonarConventionPlugin : Plugin<Project> {
                     property("sonar.sourceEncoding", "UTF-8")
                     property("sonar.gradle.skipCompile", "true")
                     property("sonar.exclusions", EXCLUSIONS.joinToString(","))
+                    property("sonar.coverage.exclusions", "**/*")
                 }
             }
 

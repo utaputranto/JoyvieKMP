@@ -19,6 +19,7 @@ fun NavGraphBuilder.onboardingGraph(navController: NavController) {
             val viewModel = koinViewModel<OnboardingViewModel>()
             OnboardingScreen1(
                 deviceInfo = viewModel.deviceInfo,
+                toastEvent = viewModel.toastEvent,
                 onNext = { navController.navigate(OnboardingScreen2Route) },
                 onTestEndpoint = { viewModel.testHitEndpoint() },
             )
@@ -26,6 +27,7 @@ fun NavGraphBuilder.onboardingGraph(navController: NavController) {
         composable<OnboardingScreen2Route> {
             val viewModel = koinViewModel<OnboardingViewModel>()
             OnboardingScreen2(
+                toastEvent = viewModel.toastEvent,
                 onFinished = {
                     viewModel.finishOnboarding {
                         navController.navigateToAuth()

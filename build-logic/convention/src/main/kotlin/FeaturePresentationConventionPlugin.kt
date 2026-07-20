@@ -18,7 +18,7 @@ class FeaturePresentationConventionPlugin : Plugin<Project> {
                     implementation(project("$featureBasePath:domain"))
                     implementation(project(":core:model"))
                     implementation(project(":core:platform"))
-                    implementation(project(":core:designsystem"))
+                    api(project(":core:designsystem"))
                     implementation(libsExtension.findLibrary("androidx-lifecycle-viewmodelCompose").get())
                     implementation(libsExtension.findLibrary("androidx-navigation-compose").get())
                     implementation(libsExtension.findLibrary("koin-core").get())

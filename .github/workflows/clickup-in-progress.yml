@@ -1,0 +1,39 @@
+name: Move ClickUp Task to In Progress
+
+on:
+  create:
+
+jobs:
+  move-to-in-progress:
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract Task ID and Update ClickUp Status
+        env:
+          CLICKUP_TOKEN: ${{ secrets.CLICKUP_API_TOKEN }}
+          BRANCH_NAME: ${{ github.event.ref }}
+        run: |
+          echo "Branch created: $BRANCH_NAME"
+
+          TASK_ID=$(echo "$BRANCH_NAME" | grep -oE '[a-zA-Z0-9]{8,9}' | tail -n 1)
+
+          if [ -n "$TASK_ID" ]; then
+            echo "Found ClickUp Task ID: $TASK_ID"
+
+            RESPONSE=$(curl -s -w "%{http_code}" -X PUT "https://api.clickup.com/api/v2/task/$TASK_ID" \
+              -H "Authorization: $CLICKUP_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d '{"status": "in progress"}')
+
+            HTTP_CODE="${RESPONSE:${#RESPONSE}-3}"
+          
+            if [ "$HTTP_CODE" -eq 200 ]; then
+              echo "Successfully moved task $TASK_ID to 'In Progress'!"
+            else
+              echo "Failed to update ClickUp task. HTTP Status Code: $HTTP_CODE"
+              exit 1
+            fi
+          else
+            echo "No valid Task ID found in branch name. Skipping ClickUp update."
+          fi

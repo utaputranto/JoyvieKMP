@@ -19,18 +19,26 @@ import com.utaputranto.joyviekmp.core.designsystem.atom.JoyvieButtonStyle
 import com.utaputranto.joyviekmp.core.designsystem.theme.JoyvieTheme
 import com.utaputranto.joyviekmp.core.platform.AppLogger
 import com.utaputranto.joyviekmp.core.platform.DeviceInfo
+import com.utaputranto.joyviekmp.core.platform.showToast
+import kotlinx.coroutines.flow.SharedFlow
 
-private const val TAG = "OnboardingScreen1"
+private const val TAG = "OnboardingScreen"
 
 @Composable
 fun OnboardingScreen1(
     deviceInfo: DeviceInfo,
+    toastEvent: SharedFlow<String>,
     onNext: () -> Unit,
     onTestEndpoint: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Listen Toast Event dari ViewModel khusus untuk Screen 1
     LaunchedEffect(Unit) {
-        AppLogger.i(TAG, "Screen shown on ${deviceInfo.osName} ${deviceInfo.osVersion}")
+        AppLogger.i(TAG, "Screen 1 shown on ${deviceInfo.osName} ${deviceInfo.osVersion}")
+
+        toastEvent.collect { message ->
+            showToast(message)
+        }
     }
 
     Column(
@@ -80,9 +88,17 @@ fun OnboardingScreen1(
 
 @Composable
 fun OnboardingScreen2(
+    toastEvent: SharedFlow<String>,
     onFinished: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Listen Toast Event dari ViewModel khusus untuk Screen 2
+    LaunchedEffect(Unit) {
+        toastEvent.collect { message ->
+            showToast(message)
+        }
+    }
+
     Column(
         modifier =
             modifier

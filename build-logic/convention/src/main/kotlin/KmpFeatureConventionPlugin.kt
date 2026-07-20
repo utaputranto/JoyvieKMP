@@ -16,19 +16,19 @@ class KmpFeatureConventionPlugin : Plugin<Project> {
 
             kotlinMultiplatform {
                 sourceSets.getByName("commonMain").dependencies {
-                    implementation(libsExtension.findLibrary("compose-runtime").get())
-                    implementation(libsExtension.findLibrary("compose-foundation").get())
-                    implementation(libsExtension.findLibrary("compose-material3").get())
-                    implementation(libsExtension.findLibrary("compose-ui").get())
-                    implementation(libsExtension.findLibrary("compose-components-resources").get())
-                    implementation(libsExtension.findLibrary("compose-uiToolingPreview").get())
+                    api(libsExtension.findLibrary("compose-runtime").get())
+                    api(libsExtension.findLibrary("compose-foundation").get())
+                    api(libsExtension.findLibrary("compose-material3").get())
+                    api(libsExtension.findLibrary("compose-ui").get())
+                    api(libsExtension.findLibrary("compose-components-resources").get())
+                    api(libsExtension.findLibrary("compose-uiToolingPreview").get())
                     implementation(libsExtension.findLibrary("coil3-compose").get())
                     implementation(libsExtension.findLibrary("coil3-network-ktor3").get())
                 }
                 // Renderer used by Android Studio to display @Preview composables;
                 // without it previews in this module never render.
                 sourceSets.getByName("androidMain").dependencies {
-                    implementation(libsExtension.findLibrary("compose-uiTooling").get())
+                    api(libsExtension.findLibrary("compose-uiTooling").get())
                 }
             }
         }

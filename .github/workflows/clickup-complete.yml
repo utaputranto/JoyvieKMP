@@ -33,6 +33,9 @@ jobs:
           
             if [ "$HTTP_CODE" -eq 200 ]; then
               echo "Successfully moved task $TASK_ID to 'Complete'!"
+            elif [ "$HTTP_CODE" -eq 401 ]; then
+              echo "Warning: Unauthorized access to ClickUp API. Please check your CLICKUP_API_TOKEN."
+              exit 0
             else
               echo "Failed to update ClickUp task. HTTP Status Code: $HTTP_CODE"
               exit 1

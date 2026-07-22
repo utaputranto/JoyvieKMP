@@ -43,6 +43,7 @@ fun JoyvieButton(
     loading: Boolean = false,
     style: JoyvieButtonStyle = JoyvieButtonStyle.Primary,
     leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
 ) {
     val isClickable = enabled && !loading
     val colors = JoyvieTheme.colors
@@ -91,6 +92,13 @@ fun JoyvieButton(
                 text = text,
                 style = JoyvieTheme.typography.label,
             )
+
+            if (!loading && trailingIcon != null) {
+                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.small))
+                Box(modifier = Modifier.size(18.dp)) {
+                    trailingIcon()
+                }
+            }
         }
     }
 }

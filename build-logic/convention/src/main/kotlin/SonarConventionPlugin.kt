@@ -3,6 +3,12 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.sonarqube.gradle.SonarExtension
 
+/**
+ * Convention plugin for SonarQube static code analysis (`joyvie.sonar`).
+ *
+ * Configures Sonar project keys, organization, host URL, and authentication token from environment variables,
+ * while automatically mapping source and test directories across KMP subprojects.
+ */
 class SonarConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {

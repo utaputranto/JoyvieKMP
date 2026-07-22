@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.dokka)
 }
 
 group = "com.joyvie.buildlogic"
@@ -13,6 +14,8 @@ dependencies {
     implementation(libs.spotless.gradle.plugin)
     implementation(libs.sonarqube.gradle.plugin)
     implementation(libs.google.services.gradle.plugin)
+    compileOnly(libs.dokka.gradle.plugin)
+    implementation(libs.kover.gradle.plugin)
 }
 
 gradlePlugin {
@@ -25,9 +28,25 @@ gradlePlugin {
             id = "joyvie.kmp.library"
             implementationClass = "KmpLibraryConventionPlugin"
         }
+        register("kmpCompose") {
+            id = "joyvie.kmp.compose"
+            implementationClass = "ComposeConventionPlugin"
+        }
+        register("kmpDataStore") {
+            id = "joyvie.kmp.datastore"
+            implementationClass = "DataStoreConventionPlugin"
+        }
         register("spotless") {
             id = "joyvie.spotless"
             implementationClass = "SpotlessConventionPlugin"
+        }
+        register("dokka") {
+            id = "joyvie.dokka"
+            implementationClass = "DokkaConventionPlugin"
+        }
+        register("kover") {
+            id = "joyvie.kover"
+            implementationClass = "KoverConventionPlugin"
         }
         register("sonar") {
             id = "joyvie.sonar"

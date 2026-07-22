@@ -2,7 +2,9 @@ package com.utaputranto.joyviekmp.feature.auth.domain.usecase
 
 import com.utaputranto.joyviekmp.core.model.User
 import com.utaputranto.joyviekmp.feature.auth.domain.repository.AuthRepository
+import org.koin.core.annotation.Factory
 
+@Factory
 class LoginUseCase(
     private val repository: AuthRepository,
 ) {

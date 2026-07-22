@@ -43,6 +43,7 @@ fun JoyvieButton(
     loading: Boolean = false,
     style: JoyvieButtonStyle = JoyvieButtonStyle.Primary,
     leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
 ) {
     val isClickable = enabled && !loading
     val colors = JoyvieTheme.colors
@@ -65,8 +66,8 @@ fun JoyvieButton(
         shape = RoundedCornerShape(24.dp),
         contentPadding =
             PaddingValues(
-                horizontal = JoyvieTheme.dimens.medium,
-                vertical = JoyvieTheme.dimens.small,
+                horizontal = JoyvieTheme.dimens.spacing.medium,
+                vertical = JoyvieTheme.dimens.spacing.small,
             ),
     ) {
         Row(
@@ -79,18 +80,25 @@ fun JoyvieButton(
                     color = contentColor,
                     strokeWidth = 2.dp,
                 )
-                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.small))
+                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.spacing.small))
             } else if (leadingIcon != null) {
                 Box(modifier = Modifier.size(18.dp)) {
                     leadingIcon()
                 }
-                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.small))
+                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.spacing.small))
             }
 
             Text(
                 text = text,
                 style = JoyvieTheme.typography.label,
             )
+
+            if (!loading && trailingIcon != null) {
+                Spacer(modifier = Modifier.width(JoyvieTheme.dimens.spacing.small))
+                Box(modifier = Modifier.size(18.dp)) {
+                    trailingIcon()
+                }
+            }
         }
     }
 }

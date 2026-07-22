@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 private object JoyviePalette {
     // Brand — Ocean (cyan)
     val Ocean100 = Color(0xFFB3ECFA)
-    val Ocean400 = Color(0xFF26C8EF)
+    val Ocean400 = Color(0xFF82E1FF)
     val Ocean600 = Color(0xFF019FC9)
     val Ocean900 = Color(0xFF014A5F)
 
@@ -19,7 +19,7 @@ private object JoyviePalette {
     val Navy300 = Color(0xFF728EA9)
     val Navy700 = Color(0xFF1E3A5A)
     val Navy800 = Color(0xFF032541)
-    val Navy900 = Color(0xFF021A2E)
+    val Navy900 = Color(0xFF060D15)
 
     // Neutral — Slate
     val Slate50 = Color(0xFFF8FAFC)
@@ -30,7 +30,7 @@ private object JoyviePalette {
     val Slate600 = Color(0xFF475569)
     val Slate700 = Color(0xFF334155)
     val Slate800 = Color(0xFF1E293B)
-    val Slate900 = Color(0xFF0F172A)
+    val Slate900 = Color(0xFF0B1520)
 
     // Status — Success (green)
     val Green400 = Color(0xFF4ADE80)

@@ -1,34 +1,29 @@
+import ext.apiLibs
+import ext.applyPlugins
+import ext.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
- * KMP library module with Compose UI: everything from [KmpLibraryConventionPlugin]
- * plus the Compose plugins and common Compose dependencies.
+ * Convention plugin for Kotlin Multiplatform Compose Feature modules.
+ *
+ * Extends [ComposeConventionPlugin] (via `joyvie.kmp.compose`) with standard feature dependencies
+ * including `:core:designsystem` and Compose Multiplatform resource components (`compose-components-resources`).
+ * Also automatically inherits Dokka V2 documentation generation via Compose library conventions.
  */
 class KmpFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("joyvie.kmp.library")
-                apply("org.jetbrains.compose")
-                apply("org.jetbrains.kotlin.plugin.compose")
-            }
+            pluginManager.applyPlugins("joyvie.kmp.compose")
 
             kotlinMultiplatform {
                 sourceSets.getByName("commonMain").dependencies {
-                    api(libsExtension.findLibrary("compose-runtime").get())
-                    api(libsExtension.findLibrary("compose-foundation").get())
-                    api(libsExtension.findLibrary("compose-material3").get())
-                    api(libsExtension.findLibrary("compose-ui").get())
-                    api(libsExtension.findLibrary("compose-components-resources").get())
-                    api(libsExtension.findLibrary("compose-uiToolingPreview").get())
-                    implementation(libsExtension.findLibrary("coil3-compose").get())
-                    implementation(libsExtension.findLibrary("coil3-network-ktor3").get())
+                    api(project(":core:designsystem"))
+                    apiLibs("compose-components-resources")
                 }
-                // Renderer used by Android Studio to display @Preview composables;
-                // without it previews in this module never render.
-                sourceSets.getByName("androidMain").dependencies {
-                    api(libsExtension.findLibrary("compose-uiTooling").get())
+
+                sourceSets.getByName("commonTest").dependencies {
+                    implementation(project(":core:test"))
                 }
             }
         }

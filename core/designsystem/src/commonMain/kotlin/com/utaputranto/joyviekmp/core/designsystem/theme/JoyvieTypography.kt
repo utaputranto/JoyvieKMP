@@ -6,6 +6,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+val InterFontFamily: FontFamily = FontFamily.SansSerif
+
 @Stable
 data class JoyvieTypography(
     val display: TextStyle,
@@ -13,9 +15,10 @@ data class JoyvieTypography(
     val title: TextStyle,
     val body: TextStyle,
     val label: TextStyle,
+    val caption: TextStyle,
 )
 
-fun createJoyvieTypography(fontFamily: FontFamily = FontFamily.SansSerif): JoyvieTypography {
+fun createJoyvieTypography(fontFamily: FontFamily = InterFontFamily): JoyvieTypography {
     return JoyvieTypography(
         display =
             TextStyle(
@@ -34,9 +37,9 @@ fun createJoyvieTypography(fontFamily: FontFamily = FontFamily.SansSerif): Joyvi
         title =
             TextStyle(
                 fontFamily = fontFamily,
-                fontWeight = FontWeight.Medium,
-                fontSize = 18.sp,
-                lineHeight = 24.sp,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                lineHeight = 28.sp,
             ),
         body =
             TextStyle(
@@ -46,6 +49,13 @@ fun createJoyvieTypography(fontFamily: FontFamily = FontFamily.SansSerif): Joyvi
                 lineHeight = 20.sp,
             ),
         label =
+            TextStyle(
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp,
+                lineHeight = 18.sp,
+            ),
+        caption =
             TextStyle(
                 fontFamily = fontFamily,
                 fontWeight = FontWeight.Medium,

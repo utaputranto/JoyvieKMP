@@ -1,28 +1,38 @@
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import ext.applyPlugins
+import ext.kotlinMultiplatform
+import ext.libraryVersionInt
+import ext.moduleNamespace
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /**
- * Base KMP library module: Android + iOS targets, serialization plugin.
- * The Android namespace is inferred from the module path
- * (":core:model" -> "com.utaputranto.joyviekmp.core.model").
+ * Convention plugin for Kotlin Multiplatform (KMP) Library modules.
+ *
+ * Configures base KMP targets (Android library target + iOS targets `iosArm64` and `iosSimulatorArm64`),
+ * Kotlin Serialization, automatic namespace derivation from the Gradle module path, and Dokka V2 documentation.
+ *
+ * Applicable to core non-UI modules (e.g. `:core:model`, `:core:network`, `:core:platform`, `:core:datastore`)
+ * as well as feature domain, data, and API modules.
  */
 class KmpLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("org.jetbrains.kotlin.multiplatform")
-                apply("com.android.kotlin.multiplatform.library")
-                apply("org.jetbrains.kotlin.plugin.serialization")
-            }
+            pluginManager.applyPlugins(
+                "org.jetbrains.kotlin.multiplatform",
+                "com.android.kotlin.multiplatform.library",
+                "org.jetbrains.kotlin.plugin.serialization",
+                "joyvie.dokka",
+                "joyvie.kover",
+            )
 
             kotlinMultiplatform {
                 val androidTarget = targets.getByName("android") as KotlinMultiplatformAndroidLibraryTarget
                 androidTarget.apply {
                     namespace = moduleNamespace.lowercase()
-                    compileSdk = libsExtension.findVersion("android-compileSdk").get().requiredVersion.toInt()
-                    minSdk = libsExtension.findVersion("android-minSdk").get().requiredVersion.toInt()
+                    compileSdk = libraryVersionInt("android-compileSdk")
+                    minSdk = libraryVersionInt("android-minSdk")
 
                     compilerOptions {
                         jvmTarget.set(JvmTarget.JVM_17)
@@ -31,10 +41,16 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
                     androidResources {
                         enable = true
                     }
+
+                    withHostTest {}
                 }
 
                 iosArm64()
                 iosSimulatorArm64()
+
+                sourceSets.getByName("commonTest").dependencies {
+                    implementation(project(":core:test"))
+                }
             }
         }
     }

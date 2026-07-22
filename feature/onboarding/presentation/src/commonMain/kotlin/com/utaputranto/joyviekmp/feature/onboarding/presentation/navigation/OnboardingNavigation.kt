@@ -1,39 +1,57 @@
 package com.utaputranto.joyviekmp.feature.onboarding.presentation.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import com.utaputranto.joyviekmp.feature.auth.api.navigation.navigateToAuth
-import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingRoute
-import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingScreen1Route
-import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingScreen2Route
-import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingScreen1
-import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingScreen2
-import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.utaputranto.joyviekmp.core.mvi.rememberSharedStateMachine
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.WelcomeMainScreenRoute
+import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.navigateToWelcome
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingEffect
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingStateMachine
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.screen.splash.SplashMainScreen
+import com.utaputranto.joyviekmp.feature.onboarding.presentation.screen.welcome.WelcomeMainScreen
 
-fun NavGraphBuilder.onboardingGraph(navController: NavController) {
-    navigation<OnboardingRoute>(startDestination = OnboardingScreen1Route) {
-        composable<OnboardingScreen1Route> {
-            val viewModel = koinViewModel<OnboardingViewModel>()
-            OnboardingScreen1(
-                deviceInfo = viewModel.deviceInfo,
-                toastEvent = viewModel.toastEvent,
-                onNext = { navController.navigate(OnboardingScreen2Route) },
-                onTestEndpoint = { viewModel.testHitEndpoint() },
-            )
-        }
-        composable<OnboardingScreen2Route> {
-            val viewModel = koinViewModel<OnboardingViewModel>()
-            OnboardingScreen2(
-                toastEvent = viewModel.toastEvent,
-                onFinished = {
-                    viewModel.finishOnboarding {
-                        navController.navigateToAuth()
-                    }
-                },
-            )
+fun EntryProviderScope<NavKey>.onboardingEntries(
+    backStack: MutableList<NavKey>,
+    viewModelStoreOwner: ViewModelStoreOwner? = null,
+) {
+    entry<SplashMainScreenRoute> {
+        val stateMachine = rememberSharedStateMachine<OnboardingStateMachine>(viewModelStoreOwner)
+        OnboardingEffectHandler(stateMachine, backStack)
+
+        SplashMainScreen()
+    }
+    entry<WelcomeMainScreenRoute> {
+        val stateMachine = rememberSharedStateMachine<OnboardingStateMachine>(viewModelStoreOwner)
+        val state by stateMachine.state.collectAsStateWithLifecycle()
+        OnboardingEffectHandler(stateMachine, backStack)
+
+        WelcomeMainScreen(
+            state = state,
+            onEvent = stateMachine::onEvent,
+        )
+    }
+}
+
+@Composable
+private fun OnboardingEffectHandler(
+    stateMachine: OnboardingStateMachine,
+    backStack: MutableList<NavKey>,
+) {
+    LaunchedEffect(stateMachine.effect) {
+        stateMachine.effect.collect { effect ->
+            when (effect) {
+                OnboardingEffect.NavigateToHome -> {
+                    // TODO: Navigate to Home feature when Home API is available
+                }
+
+                OnboardingEffect.NavigateToWelcome -> backStack.navigateToWelcome()
+            }
         }
     }
 }

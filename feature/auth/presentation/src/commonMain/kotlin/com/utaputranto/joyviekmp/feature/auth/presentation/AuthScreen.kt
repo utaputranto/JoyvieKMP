@@ -34,7 +34,7 @@ fun AuthScreen1(
             modifier
                 .fillMaxSize()
                 .background(JoyvieTheme.colors.background)
-                .padding(JoyvieTheme.dimens.medium),
+                .padding(JoyvieTheme.dimens.spacing.medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -43,7 +43,7 @@ fun AuthScreen1(
             style = JoyvieTheme.typography.headline,
             color = JoyvieTheme.colors.onBackground,
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.small))
         if (uiState.user != null) {
             Text(
                 text = "Logged in as ${uiState.user.name} (${uiState.user.email})",
@@ -57,7 +57,7 @@ fun AuthScreen1(
                 color = JoyvieTheme.colors.onSurfaceVariant,
             )
         }
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.large))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.large))
         JoyvieTextField(
             value = uiState.email,
             onValueChange = onEmailChanged,
@@ -67,7 +67,7 @@ fun AuthScreen1(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.fillMaxWidth(),
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.small))
         JoyvieTextField(
             value = uiState.password,
             onValueChange = onPasswordChanged,
@@ -77,7 +77,7 @@ fun AuthScreen1(
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.large))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.large))
         JoyvieButton(
             text = if (uiState.user != null) "Logged In" else "Login",
             onClick = onLogin,
@@ -85,7 +85,7 @@ fun AuthScreen1(
             enabled = uiState.canSubmit,
             modifier = Modifier.fillMaxWidth(),
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.small))
         JoyvieButton(
             text = "Register Screen",
             onClick = onNext,
@@ -104,7 +104,7 @@ fun AuthScreen2(
             modifier
                 .fillMaxSize()
                 .background(JoyvieTheme.colors.background)
-                .padding(JoyvieTheme.dimens.medium),
+                .padding(JoyvieTheme.dimens.spacing.medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -113,13 +113,13 @@ fun AuthScreen2(
             style = JoyvieTheme.typography.headline,
             color = JoyvieTheme.colors.onBackground,
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.small))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.small))
         Text(
             text = "Registration is coming soon.",
             style = JoyvieTheme.typography.body,
             color = JoyvieTheme.colors.onSurfaceVariant,
         )
-        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.large))
+        Spacer(modifier = Modifier.height(JoyvieTheme.dimens.spacing.large))
         JoyvieButton(
             text = "Go back to Onboarding",
             onClick = onResetOnboarding,

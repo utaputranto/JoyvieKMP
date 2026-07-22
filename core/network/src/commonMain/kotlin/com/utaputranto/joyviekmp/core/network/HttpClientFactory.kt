@@ -15,6 +15,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Single
 
 data class TmdbNetworkConfig(
     val baseUrl: String = "https://api.themoviedb.org/",
@@ -22,6 +23,7 @@ data class TmdbNetworkConfig(
     val defaultLanguage: String = "en-US",
 )
 
+@Single
 class TmdbHttpClientFactory(
     private val config: TmdbNetworkConfig,
     private val engine: HttpClientEngine? = null,

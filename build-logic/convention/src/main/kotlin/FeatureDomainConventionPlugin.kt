@@ -2,7 +2,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
- * Feature `domain` layer: repository contracts + use cases, pure Kotlin.
+ * Feature `domain` layer: repository contracts + use cases.
  */
 class FeatureDomainConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -12,6 +12,7 @@ class FeatureDomainConventionPlugin : Plugin<Project> {
             kotlinMultiplatform {
                 sourceSets.getByName("commonMain").dependencies {
                     api(project(":core:model"))
+                    api(libsExtension.findLibrary("compose-components-resources").get())
                 }
             }
         }

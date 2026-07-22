@@ -24,6 +24,7 @@ class FeaturePresentationConventionPlugin : Plugin<Project> {
                     implementation(libsExtension.findLibrary("koin-core").get())
                     implementation(libsExtension.findLibrary("koin-core-viewmodel").get())
                     implementation(libsExtension.findLibrary("koin-compose-viewmodel").get())
+                    implementation(libsExtension.findLibrary("compose-navigationevent").get())
                 }
             }
         }

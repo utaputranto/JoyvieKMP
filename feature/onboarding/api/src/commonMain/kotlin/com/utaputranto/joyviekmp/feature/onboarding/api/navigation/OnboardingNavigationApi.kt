@@ -8,10 +8,10 @@ import kotlinx.serialization.Serializable
 object OnboardingRoute
 
 @Serializable
-object OnboardingScreen1Route
+object SplashMainScreenRoute
 
 @Serializable
-object OnboardingScreen2Route
+object WelcomeMainScreenRoute
 
 fun NavController.navigateToOnboarding() {
     val route = graph.findStartDestination().route

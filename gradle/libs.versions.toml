@@ -26,6 +26,8 @@ material = "1.10.0"
 googleServices = "4.5.0"
 firebaseBom = "34.16.0"
 
+composeNavigationEvent = "1.0.0"
+
 
 
 [libraries]
@@ -47,6 +49,8 @@ koin-core-viewmodel = { module = "io.insert-koin:koin-core-viewmodel", version.r
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
+compose-navigationevent = { module = "org.jetbrains.androidx.navigationevent:navigationevent-compose", version.ref = "composeNavigationEvent" }
+
 
 
 # Build-logic dependencies

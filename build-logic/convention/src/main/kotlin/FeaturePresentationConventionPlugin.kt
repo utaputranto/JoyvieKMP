@@ -6,6 +6,13 @@ import ext.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+/**
+ * Convention plugin for feature presentation modules (`:feature:<name>:presentation`).
+ *
+ * Applies `joyvie.kmp.feature` Compose conventions, automatically adding dependencies to sibling
+ * `api` and `domain` modules, `:core:model`, `:core:platform`, ViewModel lifecycle extensions,
+ * Navigation 3 runtime, and Koin ViewModel integration.
+ */
 class FeaturePresentationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {

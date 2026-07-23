@@ -11,6 +11,13 @@ import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
+/**
+ * Convention plugin for `composeApp` multiplatform root entry application.
+ *
+ * Applies Compose conventions via `joyvie.kmp.compose`, configures iOS framework binaries (`ComposeApp.framework`),
+ * automatically scans and wires dependencies for all `:core:*` and `:feature:*` modules in `rootProject.subprojects`,
+ * configures Compose resources package names, and inherits Dokka V2 documentation generation.
+ */
 class ComposeAppConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {

@@ -60,7 +60,7 @@ kotlin {
         commonMain {
             kotlin.srcDir(generateBuildConfig)
             dependencies {
-                api(project(":core:platform"))
+                api(projects.core.platform)
                 api(projects.core.model)
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.content.negotiation)

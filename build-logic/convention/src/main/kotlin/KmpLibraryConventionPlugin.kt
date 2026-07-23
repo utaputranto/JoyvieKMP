@@ -7,6 +7,15 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+/**
+ * Convention plugin for Kotlin Multiplatform (KMP) Library modules.
+ *
+ * Configures base KMP targets (Android library target + iOS targets `iosArm64` and `iosSimulatorArm64`),
+ * Kotlin Serialization, automatic namespace derivation from the Gradle module path, and Dokka V2 documentation.
+ *
+ * Applicable to core non-UI modules (e.g. `:core:model`, `:core:network`, `:core:platform`, `:core:datastore`)
+ * as well as feature domain, data, and API modules.
+ */
 class KmpLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -14,6 +23,7 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
                 "org.jetbrains.kotlin.multiplatform",
                 "com.android.kotlin.multiplatform.library",
                 "org.jetbrains.kotlin.plugin.serialization",
+                "joyvie.dokka",
             )
 
             kotlinMultiplatform {

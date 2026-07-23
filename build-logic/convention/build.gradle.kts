@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.dokka)
 }
 
 group = "com.joyvie.buildlogic"
@@ -13,6 +14,7 @@ dependencies {
     implementation(libs.spotless.gradle.plugin)
     implementation(libs.sonarqube.gradle.plugin)
     implementation(libs.google.services.gradle.plugin)
+    compileOnly(libs.dokka.gradle.plugin)
 }
 
 gradlePlugin {
@@ -36,6 +38,10 @@ gradlePlugin {
         register("spotless") {
             id = "joyvie.spotless"
             implementationClass = "SpotlessConventionPlugin"
+        }
+        register("dokka") {
+            id = "joyvie.dokka"
+            implementationClass = "DokkaConventionPlugin"
         }
         register("sonar") {
             id = "joyvie.sonar"

@@ -1,7 +1,7 @@
 [versions]
 androidx-datastore-preferences = "1.2.1"
 coil3 = "3.5.0"
-agp = "9.2.1"
+agp = "9.3.0"
 android-compileSdk = "37"
 android-minSdk = "24"
 android-targetSdk = "36"
@@ -11,7 +11,7 @@ androidx-activity = "1.13.0"
 androidx-lifecycle = "2.11.0"
 composeMultiplatform = "1.11.1"
 kotlin = "2.4.10"
-material3 = "1.11.0-alpha07"
+material3 = "1.12.0-alpha03"
 spotless = "8.8.0"
 sonarqube = "7.3.1.8318"
 ktor = "3.5.1"
@@ -21,6 +21,7 @@ navigation3 = "1.2.0-alpha06"
 navigation3Ui = "1.2.0-alpha02"
 serialization-json = "1.11.0"
 coroutines = "1.11.0"
+dokka = "2.2.0"
 googleServices = "4.5.0"
 firebaseBom = "34.16.0"
 
@@ -65,6 +66,7 @@ kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serializat
 compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeMultiplatform" }
 spotless-gradle-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 sonarqube-gradle-plugin = { module = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin", version.ref = "sonarqube" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
 
 # Ktor Client Dependencies
@@ -86,6 +88,7 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 joyvie-sonar = { id = "joyvie.sonar" }
 koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 
@@ -95,6 +98,7 @@ joyvie-kmp-library = { id = "joyvie.kmp.library" }
 joyvie-kmp-compose = { id = "joyvie.kmp.compose" }
 joyvie-kmp-datastore = { id = "joyvie.kmp.datastore" }
 joyvie-spotless = { id = "joyvie.spotless" }
+joyvie-dokka = { id = "joyvie.dokka" }
 joyvie-kmp-application = { id = "joyvie.kmp.application" }
 joyvie-android-application = { id = "joyvie.android.application" }
 joyvie-feature-api = { id = "joyvie.feature.api" }

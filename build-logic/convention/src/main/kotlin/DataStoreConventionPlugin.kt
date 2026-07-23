@@ -5,6 +5,12 @@ import ext.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+/**
+ * Convention plugin for DataStore persistence library modules (`joyvie.kmp.datastore`).
+ *
+ * Configures base KMP library setup via `joyvie.kmp.library`, adding dependencies for kotlinx-coroutines,
+ * Jetpack DataStore Preferences Core, DataStore Okio core, and Koin DI.
+ */
 class DataStoreConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {

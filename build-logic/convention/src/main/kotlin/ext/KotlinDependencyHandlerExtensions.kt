@@ -5,6 +5,10 @@ import org.gradle.api.provider.ProviderConvertible
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import java.util.Optional
 
+/**
+ * Convenience extension for adding `implementation` dependencies in KMP source sets,
+ * supporting Providers, Optionals, and standard Gradle notations.
+ */
 fun KotlinDependencyHandler.implementation(vararg dependencies: Any?) {
     dependencies.filterNotNull().forEach { dependency ->
         when (dependency) {
@@ -16,6 +20,10 @@ fun KotlinDependencyHandler.implementation(vararg dependencies: Any?) {
     }
 }
 
+/**
+ * Convenience extension for adding `api` dependencies in KMP source sets,
+ * supporting Providers, Optionals, and standard Gradle notations.
+ */
 fun KotlinDependencyHandler.api(vararg dependencyNotations: Any?) {
     dependencyNotations.filterNotNull().forEach { dependency ->
         when (dependency) {
@@ -27,12 +35,22 @@ fun KotlinDependencyHandler.api(vararg dependencyNotations: Any?) {
     }
 }
 
+/**
+ * Adds multiple implementation dependencies referenced by catalog library aliases.
+ *
+ * @param aliases Variable list of library aliases in the version catalog.
+ */
 fun KotlinDependencyHandler.implementationLibs(vararg aliases: String) {
     aliases.forEach { alias ->
         project.libsExtension.findLibrary(alias).ifPresent { implementation(it.get()) }
     }
 }
 
+/**
+ * Adds multiple API dependencies referenced by catalog library aliases.
+ *
+ * @param aliases Variable list of library aliases in the version catalog.
+ */
 fun KotlinDependencyHandler.apiLibs(vararg aliases: String) {
     aliases.forEach { alias ->
         project.libsExtension.findLibrary(alias).ifPresent { api(it.get()) }

@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.joyvie.kmp.library)
+    alias(libs.plugins.koin.compiler)
 }
 
 abstract class GenerateBuildConfigTask : DefaultTask() {
@@ -65,6 +66,7 @@ kotlin {
                 api(libs.ktor.client.content.negotiation)
                 api(libs.ktor.serialization.kotlinx.json)
                 api(libs.koin.core)
+                implementation(libs.koin.annotations)
             }
         }
         androidMain.dependencies {

@@ -19,7 +19,7 @@ class FeatureDataConventionPlugin : Plugin<Project> {
                         project(":core:network"),
                         project(":core:datastore"),
                     )
-                    implementationLibs("koin-core")
+                    implementationLibs("koin-core", "koin-annotations")
                 }
             }
         }

@@ -19,7 +19,9 @@ import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_de
 import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_title
 import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_title_highlight
 import kotlinx.coroutines.flow.first
+import org.koin.core.annotation.Single
 
+@Single(binds = [OnboardingRepository::class])
 class OnboardingRepositoryImpl(
     private val preferenceStorage: PreferenceStorage,
 ) : OnboardingRepository {

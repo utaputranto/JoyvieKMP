@@ -4,7 +4,9 @@ import com.utaputranto.joyviekmp.core.model.Movie
 import com.utaputranto.joyviekmp.feature.onboarding.data.mapper.toDomain
 import com.utaputranto.joyviekmp.feature.onboarding.data.remote.TmdbNetworkDataSource
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.MovieRepository
+import org.koin.core.annotation.Single
 
+@Single(binds = [MovieRepository::class])
 class MovieRepositoryImpl(
     private val apiService: TmdbNetworkDataSource,
 ) : MovieRepository {

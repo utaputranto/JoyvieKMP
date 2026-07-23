@@ -1,6 +1,7 @@
 import ext.api
 import ext.apiLibs
 import ext.applyPlugins
+import ext.implementationLibs
 import ext.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -14,6 +15,8 @@ class FeatureDomainConventionPlugin : Plugin<Project> {
                 sourceSets.getByName("commonMain").dependencies {
                     api(project(":core:model"))
                     apiLibs("compose-components-resources")
+                    // Annotated use cases (@Factory) live here.
+                    implementationLibs("koin-core", "koin-annotations")
                 }
             }
         }

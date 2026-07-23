@@ -25,6 +25,7 @@ class FeaturePresentationConventionPlugin : Plugin<Project> {
                         "koin-core",
                         "koin-core-viewmodel",
                         "koin-compose-viewmodel",
+                        "koin-annotations",
                         "compose-navigationevent",
                     )
                 }

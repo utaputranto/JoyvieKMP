@@ -17,6 +17,7 @@ class DataStoreConventionPlugin : Plugin<Project> {
                         "androidx-datastore-preferences-core",
                         "androidx-datastore-core-okio",
                         "koin-core",
+                        "koin-annotations",
                     )
                 }
             }

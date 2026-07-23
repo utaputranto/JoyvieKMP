@@ -14,7 +14,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class OnboardingViewModel(
     private val completeOnboarding: CompleteOnboardingUseCase,
     private val getOnboardingPages: GetOnboardingPagesUseCase,

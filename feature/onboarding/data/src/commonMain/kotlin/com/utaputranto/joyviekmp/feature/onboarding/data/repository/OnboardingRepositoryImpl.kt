@@ -1,5 +1,6 @@
 package com.utaputranto.joyviekmp.feature.onboarding.data.repository
 
+import com.utaputranto.joyviekmp.core.datastore.PreferenceStorage
 import com.utaputranto.joyviekmp.feature.onboarding.domain.model.OnboardingPage
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.OnboardingRepository
 import joyviekmp.feature.onboarding.data.generated.resources.Res
@@ -17,16 +18,17 @@ import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step2_ti
 import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_description
 import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_title
 import joyviekmp.feature.onboarding.data.generated.resources.onboarding_step3_title_highlight
+import kotlinx.coroutines.flow.first
 
-class OnboardingRepositoryImpl : OnboardingRepository {
-    private var completed = false
-
+class OnboardingRepositoryImpl(
+    private val preferenceStorage: PreferenceStorage,
+) : OnboardingRepository {
     override suspend fun isCompleted(): Boolean {
-        return completed
+        return preferenceStorage.isCompletedOnboarding().first()
     }
 
     override suspend fun completeOnboarding() {
-        completed = true
+        preferenceStorage.completeOnboarding(true)
     }
 
     override suspend fun getOnboardingPages(): List<OnboardingPage> {

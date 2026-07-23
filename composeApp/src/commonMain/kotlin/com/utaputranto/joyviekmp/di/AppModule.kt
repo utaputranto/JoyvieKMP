@@ -1,5 +1,6 @@
 package com.utaputranto.joyviekmp.di
 
+import com.utaputranto.joyviekmp.core.datastore.di.dataStoreModule
 import com.utaputranto.joyviekmp.core.platform.getDeviceInfo
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -9,4 +10,4 @@ val platformModule: Module =
         single { getDeviceInfo() }
     }
 
-val appModules: List<Module> = listOf(platformModule) + generatedModules
+val appModules: List<Module> = listOf(platformModule) + generatedModules + dataStoreModule

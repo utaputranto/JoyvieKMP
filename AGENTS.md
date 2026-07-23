@@ -35,9 +35,10 @@ understand what each module is allowed to depend on:
 - `joyvie.kmp.library` (`KmpLibraryConventionPlugin`) — base: Android + iOS targets, serialization,
   namespace auto-derived from the Gradle path (`:core:model` → `com.utaputranto.joyviekmp.core.model`).
 - `joyvie.kmp.feature` (`KmpFeatureConventionPlugin`) — above + Compose Multiplatform.
-- `joyvie.feature.api` — route objects (`@Serializable`) + `NavController` extension functions for
-  navigating into the feature. No domain/data deps. Other features depend on a feature's `api`
-  module to navigate to it without pulling in its implementation.
+- `joyvie.feature.api` — route keys (`@Serializable data object ... : NavKey`) + `MutableList<NavKey>`
+  extension functions (e.g. `navigateToAuth()`) that mutate the shared Nav3 back stack. No domain/data
+  deps. Other features depend on a feature's `api` module to navigate to it without pulling in its
+  implementation.
 - `joyvie.feature.domain` — repository interfaces + use cases, pure Kotlin, depends only on
   `:core:model`.
 - `joyvie.feature.data` — repository implementations; auto-depends on the sibling `domain` module,
@@ -69,10 +70,19 @@ compiler, so keep the `val <name>Module = module { ... }` shape recognizable.
 
 ### Navigation
 
-Each feature's `api` module declares `@Serializable` route objects and `NavController.navigateToX()`
-extensions (type-safe Navigation Compose routes). Each feature's `presentation` module declares a
-`NavGraphBuilder.xGraph(navController)` extension. `composeApp/.../AppNavigation.kt` composes these
-graphs into one `NavHost` and is the one place that lists every feature's graph explicitly.
+Uses **Navigation 3** (`androidx.navigation3` runtime + `org.jetbrains.androidx.navigation3:navigation3-ui`
+for the KMP `NavDisplay`; currently alpha). The back stack is state, not a controller: a
+`NavBackStack` (a `MutableList<NavKey>`) that you mutate — `add(key)` to push, `removeLastOrNull()` to
+pop, `clear()` + `add(...)` to reset.
+
+- Each feature's `api` module declares `@Serializable data object XRoute : NavKey` route keys and
+  `MutableList<NavKey>.navigateToX()` reset helpers.
+- Each feature's `presentation` module declares an `EntryProviderScope<NavKey>.xEntries(backStack)`
+  extension that registers screens via `entry<XRoute> { ... }`.
+- `composeApp/.../AppNavigation.kt` owns the single `NavBackStack`, renders one `NavDisplay`, and is
+  the one place that lists every feature's entries (`onboardingEntries(backStack)`, `authEntries(...)`)
+  in its `entryProvider { }`. `NavDisplay`'s `entryDecorators` include
+  `rememberViewModelStoreNavEntryDecorator()` so `koinViewModel()` is scoped per back-stack entry.
 
 ### core modules
 

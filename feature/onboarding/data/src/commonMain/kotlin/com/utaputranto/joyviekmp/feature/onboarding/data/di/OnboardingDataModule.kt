@@ -7,6 +7,7 @@ import com.utaputranto.joyviekmp.feature.onboarding.data.repository.OnboardingRe
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.MovieRepository
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.OnboardingRepository
 import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.CompleteOnboardingUseCase
+import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.GetIsCompletedOnboardingUseCase
 import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.GetOnboardingPagesUseCase
 import com.utaputranto.joyviekmp.feature.onboarding.domain.usecase.GetPopularMoviesUseCase
 import org.koin.core.module.Module
@@ -14,11 +15,12 @@ import org.koin.dsl.module
 
 val onboardingDataModule: Module =
     module {
-        single<OnboardingRepository> { OnboardingRepositoryImpl() }
+        single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
         single<MovieRepository> { MovieRepositoryImpl(get()) }
         single { TmdbNetworkDataSource(get()) }
         single { TmdbApiService(get()) }
         factory { CompleteOnboardingUseCase(get()) }
+        factory { GetIsCompletedOnboardingUseCase(get()) }
         factory { GetPopularMoviesUseCase(get()) }
         factory { GetOnboardingPagesUseCase(get()) }
     }

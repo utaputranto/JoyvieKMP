@@ -1,0 +1,10 @@
+--- OnboardingNavigation.kt
++++ OnboardingNavigation.kt
+@@ -10,6 +10,7 @@
+ import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
+ import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.WelcomeMainScreenRoute
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingViewModel
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.SplashMainScreen
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.WelcomeMainScreen
++import com.utaputranto.joyviekmp.core.platform.showToast
+ import kotlinx.coroutines.delay

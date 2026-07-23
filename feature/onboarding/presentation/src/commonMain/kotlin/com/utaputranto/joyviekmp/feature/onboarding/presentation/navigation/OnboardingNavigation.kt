@@ -3,12 +3,10 @@ package com.utaputranto.joyviekmp.feature.onboarding.presentation.navigation
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import androidx.navigation.navigation
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.utaputranto.joyviekmp.core.platform.showToast
 import com.utaputranto.joyviekmp.feature.auth.api.navigation.navigateToAuth
-import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.OnboardingRoute
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.WelcomeMainScreenRoute
 import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingViewModel
@@ -18,34 +16,37 @@ import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.Duration.Companion.milliseconds
 
-fun NavGraphBuilder.onboardingGraph(navController: NavController) {
-    navigation<OnboardingRoute>(startDestination = SplashMainScreenRoute) {
-        composable<SplashMainScreenRoute> {
-            LaunchedEffect(Unit) {
-                delay(1000L.milliseconds)
-                navController.navigate(WelcomeMainScreenRoute) {
-                    popUpTo(SplashMainScreenRoute) { inclusive = true }
-                }
-            }
-            SplashMainScreen()
+fun EntryProviderScope<NavKey>.onboardingEntries(backStack: MutableList<NavKey>) {
+    entry<SplashMainScreenRoute> {
+        LaunchedEffect(Unit) {
+            delay(1000L.milliseconds)
+            backStack.remove(SplashMainScreenRoute)
+            backStack.add(WelcomeMainScreenRoute)
         }
-        composable<WelcomeMainScreenRoute> {
-            val viewModel = koinViewModel<OnboardingViewModel>()
-            val pages by viewModel.pages.collectAsStateWithLifecycle()
+        SplashMainScreen()
+    }
+    entry<WelcomeMainScreenRoute> {
+        val viewModel = koinViewModel<OnboardingViewModel>()
+        val pages by viewModel.pages.collectAsStateWithLifecycle()
 
-            WelcomeMainScreen(
-                pages = pages,
-                onSkip = {
-                    viewModel.finishOnboarding {
-                        navController.navigateToAuth()
-                    }
-                },
-                onFinish = {
-                    viewModel.finishOnboarding {
-                        navController.navigateToAuth()
-                    }
-                },
-            )
+        LaunchedEffect(viewModel.toastEvent) {
+            viewModel.toastEvent.collect { message ->
+                showToast(message)
+            }
         }
+
+        WelcomeMainScreen(
+            pages = pages,
+            onSkip = {
+                viewModel.finishOnboarding {
+                    backStack.navigateToAuth()
+                }
+            },
+            onFinish = {
+                viewModel.finishOnboarding {
+                    backStack.navigateToAuth()
+                }
+            },
+        )
     }
 }

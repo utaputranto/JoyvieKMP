@@ -1,28 +1,27 @@
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import ext.applyPlugins
+import ext.kotlinMultiplatform
+import ext.libraryVersionInt
+import ext.moduleNamespace
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-/**
- * Base KMP library module: Android + iOS targets, serialization plugin.
- * The Android namespace is inferred from the module path
- * (":core:model" -> "com.utaputranto.joyviekmp.core.model").
- */
 class KmpLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("org.jetbrains.kotlin.multiplatform")
-                apply("com.android.kotlin.multiplatform.library")
-                apply("org.jetbrains.kotlin.plugin.serialization")
-            }
+            pluginManager.applyPlugins(
+                "org.jetbrains.kotlin.multiplatform",
+                "com.android.kotlin.multiplatform.library",
+                "org.jetbrains.kotlin.plugin.serialization",
+            )
 
             kotlinMultiplatform {
                 val androidTarget = targets.getByName("android") as KotlinMultiplatformAndroidLibraryTarget
                 androidTarget.apply {
                     namespace = moduleNamespace.lowercase()
-                    compileSdk = libsExtension.findVersion("android-compileSdk").get().requiredVersion.toInt()
-                    minSdk = libsExtension.findVersion("android-minSdk").get().requiredVersion.toInt()
+                    compileSdk = libraryVersionInt("android-compileSdk")
+                    minSdk = libraryVersionInt("android-minSdk")
 
                     compilerOptions {
                         jvmTarget.set(JvmTarget.JVM_17)

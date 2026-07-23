@@ -1,0 +1,5 @@
+val f = java.io.File("composeApp/src/commonMain/kotlin/com/utaputranto/joyviekmp/di/AppModule.kt")
+var text = f.readText()
+text = text.replace("import org.koin.core.module.Module", "import org.koin.core.module.Module\nimport com.utaputranto.joyviekmp.core.datastore.di.dataStoreModule")
+text = text.replace("val appModules: List<Module> = listOf(platformModule) + generatedModules", "val appModules: List<Module> = listOf(platformModule) + generatedModules + dataStoreModule")
+f.writeText(text)

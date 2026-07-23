@@ -1,0 +1,24 @@
+--- feature/onboarding/presentation/src/commonMain/kotlin/com/utaputranto/joyviekmp/feature/onboarding/presentation/navigation/OnboardingNavigation.kt
++++ feature/onboarding/presentation/src/commonMain/kotlin/com/utaputranto/joyviekmp/feature/onboarding/presentation/navigation/OnboardingNavigation.kt
+@@ -10,6 +10,7 @@
+ import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
+ import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.WelcomeMainScreenRoute
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.OnboardingViewModel
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.SplashMainScreen
+ import com.utaputranto.joyviekmp.feature.onboarding.presentation.WelcomeMainScreen
++import com.utaputranto.joyviekmp.core.platform.showToast
+ import kotlinx.coroutines.delay
+ import org.koin.compose.viewmodel.koinViewModel
+@@ -29,6 +30,12 @@
+             val viewModel = koinViewModel<OnboardingViewModel>()
+             val pages by viewModel.pages.collectAsStateWithLifecycle()
+
++            LaunchedEffect(viewModel.toastEvent) {
++                viewModel.toastEvent.collect { message ->
++                    showToast(message)
++                }
++            }
++
+             WelcomeMainScreen(
+                 pages = pages,
+                 onSkip = {

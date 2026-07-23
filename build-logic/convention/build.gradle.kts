@@ -25,6 +25,14 @@ gradlePlugin {
             id = "joyvie.kmp.library"
             implementationClass = "KmpLibraryConventionPlugin"
         }
+        register("kmpCompose") {
+            id = "joyvie.kmp.compose"
+            implementationClass = "ComposeConventionPlugin"
+        }
+        register("kmpDataStore") {
+            id = "joyvie.kmp.datastore"
+            implementationClass = "DataStoreConventionPlugin"
+        }
         register("spotless") {
             id = "joyvie.spotless"
             implementationClass = "SpotlessConventionPlugin"

@@ -1,21 +1,20 @@
+import ext.BASE_PACKAGE
+import ext.apiLibs
+import ext.applyPlugins
+import ext.featureBasePath
+import ext.implementation
+import ext.implementationLibs
+import ext.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-/**
- * App aggregator module (composeApp): Compose entry point + iOS framework.
- *
- * - Static iOS framework "ComposeApp" for both targets.
- * - Auto-depends on ALL :feature:* and :core:* modules, so a new feature is
- *   wired into the app without touching this build file.
- * - App-level dependencies: navigation, serialization, Koin.
- */
 class ComposeAppConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("joyvie.kmp.feature")
+            pluginManager.applyPlugins("joyvie.kmp.compose")
 
             val generateKoinModules =
                 tasks.register("generateKoinModules", GenerateKoinModulesTask::class.java) {
@@ -54,37 +53,40 @@ class ComposeAppConventionPlugin : Plugin<Project> {
                 sourceSets.getByName("commonMain").apply {
                     kotlin.srcDir(generateKoinModules.map { it.outputDir.get() })
                     dependencies {
-                        rootProject.subprojects
-                            .filter { it.buildFile.exists() }
-                            .filter { subproject ->
-                                val path = subproject.path
-                                path.startsWith(":core:") ||
-                                    path.endsWith(":presentation") ||
-                                    path.endsWith("$featureBasePath:data") ||
-                                    path.endsWith(":data") ||
-                                    path.endsWith(":api")
-                            }
-                            .forEach { implementation(project(it.path)) }
+                        val moduleDependencies =
+                            rootProject.subprojects
+                                .filter { it.buildFile.exists() }
+                                .filter { subproject ->
+                                    val path = subproject.path
+                                    path.startsWith(":core:") ||
+                                        path.endsWith(":presentation") ||
+                                        path.endsWith("$featureBasePath:data") ||
+                                        path.endsWith(":data") ||
+                                        path.endsWith(":api")
+                                }
+                                .map { project(it.path) }
+                                .toTypedArray()
 
-                        implementation(
-                            libsExtension.findLibrary("androidx-navigation-compose").get(),
+                        implementation(*moduleDependencies)
+                        implementationLibs("kotlinx-serialization-json")
+
+                        apiLibs(
+                            "navigation3-ui",
+                            "androidx-lifecycle-viewmodel-navigation3",
+                            "koin-core",
+                            "koin-core-viewmodel",
+                            "koin-compose",
                         )
-                        implementation(
-                            libsExtension.findLibrary("kotlinx-serialization-json").get(),
-                        )
-                        api(libsExtension.findLibrary("koin-core").get())
-                        implementation(libsExtension.findLibrary("koin-core-viewmodel").get())
-                        implementation(libsExtension.findLibrary("koin-compose").get())
                     }
                 }
                 sourceSets.getByName("commonTest").dependencies {
-                    implementation(libsExtension.findLibrary("kotlin-test").get())
+                    implementationLibs("kotlin-test")
                 }
             }
 
             extensions.configure(ComposeExtension::class.java) {
                 extensions.configure(ResourcesExtension::class.java) {
-                    packageOfResClass = "$BASE_PACKAGE.composeapp"
+                    packageOfResClass = "${BASE_PACKAGE}.composeapp"
                 }
             }
         }

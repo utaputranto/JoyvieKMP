@@ -23,6 +23,18 @@ subprojects {
     }
 }
 
+tasks.register("test") {
+    group = "verification"
+    description = "Runs all unit tests across all subprojects."
+    dependsOn(subprojects.map { sub -> sub.tasks.matching { it.name == "testAndroidHostTest" } })
+}
+
+tasks.register("testAndroidHostTest") {
+    group = "verification"
+    description = "Runs all Android Host Unit Tests across all subprojects."
+    dependsOn(subprojects.map { sub -> sub.tasks.matching { it.name == "testAndroidHostTest" } })
+}
+
 dependencies {
     subprojects
         .filter { sub ->

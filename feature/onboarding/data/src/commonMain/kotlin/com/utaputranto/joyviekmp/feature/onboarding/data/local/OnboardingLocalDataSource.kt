@@ -1,8 +1,8 @@
-package com.utaputranto.joyviekmp.core.datastore
+package com.utaputranto.joyviekmp.feature.onboarding.data.local
 
 import kotlinx.coroutines.flow.Flow
 
-interface PreferenceStorage {
+interface OnboardingLocalDataSource {
     fun isCompletedOnboarding(): Flow<Boolean>
 
     suspend fun completeOnboarding(completed: Boolean)

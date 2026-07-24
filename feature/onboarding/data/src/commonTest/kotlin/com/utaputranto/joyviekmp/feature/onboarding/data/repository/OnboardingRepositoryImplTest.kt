@@ -1,39 +1,39 @@
 package com.utaputranto.joyviekmp.feature.onboarding.data.repository
 
-import com.utaputranto.joyviekmp.core.test.fakes.FakePreferenceStorage
+import com.utaputranto.joyviekmp.feature.onboarding.data.fakes.FakeOnboardingLocalDataSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.first
 
 class OnboardingRepositoryImplTest : FunSpec({
 
-    lateinit var fakePreferenceStorage: FakePreferenceStorage
+    lateinit var fakeLocalDataSource: FakeOnboardingLocalDataSource
     lateinit var repository: OnboardingRepositoryImpl
 
     beforeTest {
-        fakePreferenceStorage = FakePreferenceStorage()
-        repository = OnboardingRepositoryImpl(fakePreferenceStorage)
+        fakeLocalDataSource = FakeOnboardingLocalDataSource()
+        repository = OnboardingRepositoryImpl(fakeLocalDataSource)
     }
 
     test("isCompleted should return true when preference is completed") {
-        fakePreferenceStorage.completeOnboarding(true)
+        fakeLocalDataSource.completeOnboarding(true)
         val actual = repository.isCompleted()
         actual shouldBe true
     }
 
     test("isCompleted should return false when preference is not completed") {
-        fakePreferenceStorage.completeOnboarding(false)
+        fakeLocalDataSource.completeOnboarding(false)
         val actual = repository.isCompleted()
         actual shouldBe false
     }
 
     test("completeOnboarding should save true to preferenceStorage") {
         val expectedValue = true
-        fakePreferenceStorage.completeOnboarding(false)
+        fakeLocalDataSource.completeOnboarding(false)
 
         repository.completeOnboarding()
 
-        fakePreferenceStorage.isCompletedOnboarding().first() shouldBe expectedValue
+        fakeLocalDataSource.isCompletedOnboarding().first() shouldBe expectedValue
     }
 
     test("getOnboardingPages should return valid 3 pages") {

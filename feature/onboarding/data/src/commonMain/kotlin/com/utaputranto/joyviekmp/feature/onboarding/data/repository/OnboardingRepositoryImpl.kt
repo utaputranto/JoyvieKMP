@@ -1,6 +1,6 @@
 package com.utaputranto.joyviekmp.feature.onboarding.data.repository
 
-import com.utaputranto.joyviekmp.core.datastore.PreferenceStorage
+import com.utaputranto.joyviekmp.feature.onboarding.data.local.OnboardingLocalDataSource
 import com.utaputranto.joyviekmp.feature.onboarding.domain.model.OnboardingPage
 import com.utaputranto.joyviekmp.feature.onboarding.domain.repository.OnboardingRepository
 import joyviekmp.feature.onboarding.data.generated.resources.Res
@@ -23,14 +23,14 @@ import org.koin.core.annotation.Single
 
 @Single(binds = [OnboardingRepository::class])
 class OnboardingRepositoryImpl(
-    private val preferenceStorage: PreferenceStorage,
+    private val localDataSource: OnboardingLocalDataSource,
 ) : OnboardingRepository {
     override suspend fun isCompleted(): Boolean {
-        return preferenceStorage.isCompletedOnboarding().first()
+        return localDataSource.isCompletedOnboarding().first()
     }
 
     override suspend fun completeOnboarding() {
-        preferenceStorage.completeOnboarding(true)
+        localDataSource.completeOnboarding(true)
     }
 
     override suspend fun getOnboardingPages(): List<OnboardingPage> {

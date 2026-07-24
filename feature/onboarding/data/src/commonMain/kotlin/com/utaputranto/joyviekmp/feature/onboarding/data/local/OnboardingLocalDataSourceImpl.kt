@@ -1,4 +1,4 @@
-package com.utaputranto.joyviekmp.core.datastore
+package com.utaputranto.joyviekmp.feature.onboarding.data.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Single
 
-@Single(binds = [PreferenceStorage::class])
-class DataStoreManagerImpl(
+@Single(binds = [OnboardingLocalDataSource::class])
+class OnboardingLocalDataSourceImpl(
     private val dataStore: DataStore<Preferences>,
-) : PreferenceStorage {
+) : OnboardingLocalDataSource {
     private val onboardingCompletedKey = booleanPreferencesKey("onboarding_completed")
 
     override fun isCompletedOnboarding(): Flow<Boolean> {

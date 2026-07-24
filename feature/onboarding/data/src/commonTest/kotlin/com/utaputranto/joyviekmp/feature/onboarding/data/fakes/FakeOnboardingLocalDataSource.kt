@@ -1,11 +1,11 @@
-package com.utaputranto.joyviekmp.core.test.fakes
+package com.utaputranto.joyviekmp.feature.onboarding.data.fakes
 
-import com.utaputranto.joyviekmp.core.datastore.PreferenceStorage
+import com.utaputranto.joyviekmp.feature.onboarding.data.local.OnboardingLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class FakePreferenceStorage : PreferenceStorage {
+class FakeOnboardingLocalDataSource : OnboardingLocalDataSource {
     private val isCompletedOnboardingFlow = MutableStateFlow(false)
 
     override fun isCompletedOnboarding(): Flow<Boolean> {

@@ -18,10 +18,13 @@ class DataStoreConventionPlugin : Plugin<Project> {
 
             kotlinMultiplatform {
                 sourceSets.getByName("commonMain").dependencies {
-                    apiLibs("kotlinx-coroutines-core")
-                    implementationLibs(
+                    apiLibs(
+                        "kotlinx-coroutines-core",
                         "androidx-datastore-preferences-core",
                         "androidx-datastore-core-okio",
+                        "kotlinx-serialization-json",
+                    )
+                    implementationLibs(
                         "koin-core",
                         "koin-annotations",
                     )

@@ -44,6 +44,10 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
 
                 iosArm64()
                 iosSimulatorArm64()
+
+                sourceSets.getByName("commonTest").dependencies {
+                    implementation(project(":core:test"))
+                }
             }
         }
     }

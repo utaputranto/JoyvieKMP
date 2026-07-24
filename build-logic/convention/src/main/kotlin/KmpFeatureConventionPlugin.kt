@@ -21,6 +21,10 @@ class KmpFeatureConventionPlugin : Plugin<Project> {
                     api(project(":core:designsystem"))
                     apiLibs("compose-components-resources")
                 }
+
+                sourceSets.getByName("commonTest").dependencies {
+                    implementation(project(":core:test"))
+                }
             }
         }
     }

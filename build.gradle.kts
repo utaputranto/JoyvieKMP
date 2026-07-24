@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.joyvie.spotless)
     alias(libs.plugins.joyvie.sonar)
+    alias(libs.plugins.joyvie.kover)
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.googleServices) apply false
     alias(libs.plugins.koin.compiler)

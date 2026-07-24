@@ -24,6 +24,7 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
                 "com.android.kotlin.multiplatform.library",
                 "org.jetbrains.kotlin.plugin.serialization",
                 "joyvie.dokka",
+                "joyvie.kover",
             )
 
             kotlinMultiplatform {

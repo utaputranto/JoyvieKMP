@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.sonarqube.gradle.plugin)
     implementation(libs.google.services.gradle.plugin)
     compileOnly(libs.dokka.gradle.plugin)
+    implementation(libs.kover.gradle.plugin)
 }
 
 gradlePlugin {
@@ -42,6 +43,10 @@ gradlePlugin {
         register("dokka") {
             id = "joyvie.dokka"
             implementationClass = "DokkaConventionPlugin"
+        }
+        register("kover") {
+            id = "joyvie.kover"
+            implementationClass = "KoverConventionPlugin"
         }
         register("sonar") {
             id = "joyvie.sonar"

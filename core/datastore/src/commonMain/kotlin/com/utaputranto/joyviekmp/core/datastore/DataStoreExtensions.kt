@@ -16,12 +16,18 @@ val defaultDataStoreJson =
     }
 
 /**
- * Reads a serialized object of type [T] from [DataStore] for a given [key].
+ * Reads a serialized object of type [T] from [DataStore] for a given [key] using default Json.
+ * Returns a [Flow] emitting null if the key doesn't exist or deserialization fails.
+ */
+inline fun <reified T> DataStore<Preferences>.getObject(key: Preferences.Key<String>): Flow<T?> = getObject(key, defaultDataStoreJson)
+
+/**
+ * Reads a serialized object of type [T] from [DataStore] for a given [key] using custom [json].
  * Returns a [Flow] emitting null if the key doesn't exist or deserialization fails.
  */
 inline fun <reified T> DataStore<Preferences>.getObject(
     key: Preferences.Key<String>,
-    json: Json = defaultDataStoreJson,
+    json: Json,
 ): Flow<T?> {
     return data.map { preferences ->
         preferences.getObject<T>(key, json)
@@ -29,26 +35,42 @@ inline fun <reified T> DataStore<Preferences>.getObject(
 }
 
 /**
- * Reads a serialized object of type [T] from [Preferences] for a given [key].
+ * Reads a serialized object of type [T] from [Preferences] for a given [key] using default Json.
+ * Returns null if the key doesn't exist or deserialization fails.
+ */
+inline fun <reified T> Preferences.getObject(key: Preferences.Key<String>): T? = getObject(key, defaultDataStoreJson)
+
+/**
+ * Reads a serialized object of type [T] from [Preferences] for a given [key] using custom [json].
  * Returns null if the key doesn't exist or deserialization fails.
  */
 inline fun <reified T> Preferences.getObject(
     key: Preferences.Key<String>,
-    json: Json = defaultDataStoreJson,
+    json: Json,
 ): T? {
     val jsonString = this[key] ?: return null
-    return runCatching {
+    return try {
         json.decodeFromString<T>(jsonString)
-    }.getOrNull()
+    } catch (_: Exception) {
+        null
+    }
 }
 
 /**
- * Saves a serialized object of type [T] into [DataStore] under [key].
+ * Saves a serialized object of type [T] into [DataStore] under [key] using default Json.
  */
 suspend inline fun <reified T> DataStore<Preferences>.putObject(
     key: Preferences.Key<String>,
     value: T,
-    json: Json = defaultDataStoreJson,
+): Unit = putObject(key, value, defaultDataStoreJson)
+
+/**
+ * Saves a serialized object of type [T] into [DataStore] under [key] using custom [json].
+ */
+suspend inline fun <reified T> DataStore<Preferences>.putObject(
+    key: Preferences.Key<String>,
+    value: T,
+    json: Json,
 ) {
     val jsonString = json.encodeToString(serializer<T>(), value)
     edit { preferences ->

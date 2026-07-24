@@ -9,7 +9,7 @@ import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainDispatcherRule(
-    private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher(),
+    val testDispatcher: TestDispatcher = UnconfinedTestDispatcher(),
 ) {
     fun starting() {
         Dispatchers.setMain(testDispatcher)

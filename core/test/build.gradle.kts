@@ -15,5 +15,10 @@ kotlin {
             api(libs.kotlinx.coroutines.test)
             api(libs.turbine)
         }
+
+        androidMain.dependencies {
+            api(libs.kotest.runner.junit5)
+            api(libs.junit.platform.launcher)
+        }
     }
 }

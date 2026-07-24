@@ -60,7 +60,9 @@ compose-navigationevent = { module = "org.jetbrains.androidx.navigationevent:nav
 
 # Testing Dependencies
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }

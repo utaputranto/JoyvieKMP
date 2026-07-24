@@ -40,6 +40,8 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
                     androidResources {
                         enable = true
                     }
+
+                    withHostTest {}
                 }
 
                 iosArm64()

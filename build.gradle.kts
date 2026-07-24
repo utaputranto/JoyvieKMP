@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
@@ -13,6 +15,12 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.googleServices) apply false
     alias(libs.plugins.koin.compiler)
+}
+
+subprojects {
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
+    }
 }
 
 dependencies {

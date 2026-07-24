@@ -35,39 +35,38 @@ class OnboardingViewModelTest :
             mainDispatcherRule.finished()
         }
 
-        beforeTest {
-            fakeRepository = FakeOnboardingRepository()
-            completeOnboardingUseCase = CompleteOnboardingUseCase(fakeRepository)
-            getOnboardingPagesUseCase = GetOnboardingPagesUseCase(fakeRepository)
-            getIsCompletedOnboardingUseCase = GetIsCompletedOnboardingUseCase(fakeRepository)
-        }
-
         afterTest {
             stopKoin()
         }
 
-        Given("the view model is initialized") {
-            When("loading pages") {
-                val expectedPages =
-                    listOf(
-                        OnboardingPage(
-                            id = 1,
-                            title = StringResource("t", "t", emptySet()),
-                            titleHighlight = StringResource("t", "t", emptySet()),
-                            description = StringResource("d", "d", emptySet()),
-                            buttonText = StringResource("b", "b", emptySet()),
-                            imageBackground = DrawableResource("i", emptySet()),
-                        ),
-                    )
-                fakeRepository.setPages(expectedPages)
-                fakeRepository.setCompleted(false)
-                viewModel =
-                    OnboardingViewModel(
-                        completeOnboardingUseCase,
-                        getOnboardingPagesUseCase,
-                        getIsCompletedOnboardingUseCase,
-                    )
+        Given("the view model is initialized with uncompleted onboarding") {
+            fakeRepository = FakeOnboardingRepository()
+            completeOnboardingUseCase = CompleteOnboardingUseCase(fakeRepository)
+            getOnboardingPagesUseCase = GetOnboardingPagesUseCase(fakeRepository)
+            getIsCompletedOnboardingUseCase = GetIsCompletedOnboardingUseCase(fakeRepository)
 
+            val expectedPages =
+                listOf(
+                    OnboardingPage(
+                        id = 1,
+                        title = StringResource("t", "t", emptySet()),
+                        titleHighlight = StringResource("t", "t", emptySet()),
+                        description = StringResource("d", "d", emptySet()),
+                        buttonText = StringResource("b", "b", emptySet()),
+                        imageBackground = DrawableResource("i", emptySet()),
+                    ),
+                )
+            fakeRepository.setPages(expectedPages)
+            fakeRepository.setCompleted(false)
+
+            viewModel =
+                OnboardingViewModel(
+                    completeOnboardingUseCase,
+                    getOnboardingPagesUseCase,
+                    getIsCompletedOnboardingUseCase,
+                )
+
+            When("observing pages and toast events") {
                 Then("it should expose pages and uncompleted event") {
                     viewModel.pages.test {
                         awaitItem() shouldBe expectedPages
@@ -78,16 +77,23 @@ class OnboardingViewModelTest :
                     }
                 }
             }
+        }
 
-            When("cache says completed onboarding") {
-                fakeRepository.setCompleted(true)
-                viewModel =
-                    OnboardingViewModel(
-                        completeOnboardingUseCase,
-                        getOnboardingPagesUseCase,
-                        getIsCompletedOnboardingUseCase,
-                    )
+        Given("the view model is initialized with completed onboarding") {
+            fakeRepository = FakeOnboardingRepository()
+            completeOnboardingUseCase = CompleteOnboardingUseCase(fakeRepository)
+            getOnboardingPagesUseCase = GetOnboardingPagesUseCase(fakeRepository)
+            getIsCompletedOnboardingUseCase = GetIsCompletedOnboardingUseCase(fakeRepository)
 
+            fakeRepository.setCompleted(true)
+            viewModel =
+                OnboardingViewModel(
+                    completeOnboardingUseCase,
+                    getOnboardingPagesUseCase,
+                    getIsCompletedOnboardingUseCase,
+                )
+
+            When("observing toast events") {
                 Then("it should send Onboarding Completed! event") {
                     viewModel.toastEvent.test {
                         awaitItem() shouldBe "Onboarding Completed!"
@@ -97,6 +103,11 @@ class OnboardingViewModelTest :
         }
 
         Given("the view model is created") {
+            fakeRepository = FakeOnboardingRepository()
+            completeOnboardingUseCase = CompleteOnboardingUseCase(fakeRepository)
+            getOnboardingPagesUseCase = GetOnboardingPagesUseCase(fakeRepository)
+            getIsCompletedOnboardingUseCase = GetIsCompletedOnboardingUseCase(fakeRepository)
+
             fakeRepository.setCompleted(false)
             viewModel =
                 OnboardingViewModel(
@@ -110,6 +121,8 @@ class OnboardingViewModelTest :
                 viewModel.finishOnboarding {
                     callbackCalled = true
                 }
+
+                mainDispatcherRule.testDispatcher.scheduler.advanceUntilIdle()
 
                 Then("repository should be updated and callback called") {
                     fakeRepository.isCompleted() shouldBe true

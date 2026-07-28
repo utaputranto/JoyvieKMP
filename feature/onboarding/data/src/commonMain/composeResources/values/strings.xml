@@ -1,0 +1,16 @@
+<resources>
+    <string name="onboarding_button_next">Next</string>
+    <string name="onboarding_button_get_started">Get Started</string>
+
+    <string name="onboarding_step1_title">Discover Trending</string>
+    <string name="onboarding_step1_title_highlight">Movies &amp; TV Shows</string>
+    <string name="onboarding_step1_description">Explore curated collections, expert ratings, and personalized recommendations tailored to your unique taste.</string>
+
+    <string name="onboarding_step2_title">Search &amp; Filter</string>
+    <string name="onboarding_step2_title_highlight">Your Content</string>
+    <string name="onboarding_step2_description">Find exactly what you want to watch by filtering genres, ratings, release dates, and streaming providers effortlessly.</string>
+
+    <string name="onboarding_step3_title">Build Your</string>
+    <string name="onboarding_step3_title_highlight">Personal Watchlist</string>
+    <string name="onboarding_step3_description">Save movies and TV shows to watch later, mark your favorites, and never lose track of great cinema.</string>
+</resources>

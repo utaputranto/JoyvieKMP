@@ -8,6 +8,8 @@ kotlin {
         commonMain.dependencies {
             // Cross-feature: navigate forward to auth
             implementation(projects.feature.auth.api)
+            // Cross-feature: navigate forward to home
+            implementation(projects.feature.home.api)
         }
     }
 }

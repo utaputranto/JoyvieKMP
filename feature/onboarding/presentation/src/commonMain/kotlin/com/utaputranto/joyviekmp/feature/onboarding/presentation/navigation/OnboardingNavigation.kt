@@ -8,6 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.utaputranto.joyviekmp.core.mvi.rememberSharedStateMachine
+import com.utaputranto.joyviekmp.feature.home.api.navigation.navigateToHome
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.WelcomeMainScreenRoute
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.navigateToWelcome
@@ -46,9 +47,7 @@ private fun OnboardingEffectHandler(
     LaunchedEffect(stateMachine.effect) {
         stateMachine.effect.collect { effect ->
             when (effect) {
-                OnboardingEffect.NavigateToHome -> {
-                    // TODO: Navigate to Home feature when Home API is available
-                }
+                OnboardingEffect.NavigateToHome -> backStack.navigateToHome()
 
                 OnboardingEffect.NavigateToWelcome -> backStack.navigateToWelcome()
             }

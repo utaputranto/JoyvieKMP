@@ -5,6 +5,9 @@ import com.utaputranto.joyviekmp.core.network.di.NetworkModule
 import com.utaputranto.joyviekmp.feature.auth.data.di.AuthDataModule
 import com.utaputranto.joyviekmp.feature.auth.domain.di.AuthDomainModule
 import com.utaputranto.joyviekmp.feature.auth.presentation.di.AuthPresentationModule
+import com.utaputranto.joyviekmp.feature.home.data.di.HomeDataModule
+import com.utaputranto.joyviekmp.feature.home.domain.di.HomeDomainModule
+import com.utaputranto.joyviekmp.feature.home.presentation.di.HomePresentationModule
 import com.utaputranto.joyviekmp.feature.onboarding.data.di.OnboardingDataModule
 import com.utaputranto.joyviekmp.feature.onboarding.domain.di.OnboardingDomainModule
 import com.utaputranto.joyviekmp.feature.onboarding.presentation.di.OnboardingPresentationModule
@@ -33,5 +36,8 @@ fun KoinApplication.loadKoinModules() {
         OnboardingDomainModule::class,
         OnboardingDataModule::class,
         OnboardingPresentationModule::class,
+        HomeDomainModule::class,
+        HomeDataModule::class,
+        HomePresentationModule::class,
     )
 }

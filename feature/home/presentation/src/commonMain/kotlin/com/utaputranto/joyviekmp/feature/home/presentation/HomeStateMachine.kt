@@ -36,6 +36,7 @@ class HomeStateMachine(
 
     private fun loadNowPlaying() {
         viewModelScope.launch {
+            setState { copy(nowPlaying = SectionUiState.Loading) }
             getNowPlayingMovies().fold(
                 onSuccess = { movies -> setState { copy(nowPlaying = SectionUiState.Success(movies)) } },
                 onFailure = { error ->
@@ -47,6 +48,7 @@ class HomeStateMachine(
 
     private fun loadLatest() {
         viewModelScope.launch {
+            setState { copy(latest = SectionUiState.Loading) }
             getTopRatedMovies().fold(
                 onSuccess = { movies -> setState { copy(latest = SectionUiState.Success(movies)) } },
                 onFailure = { error ->
@@ -58,6 +60,7 @@ class HomeStateMachine(
 
     private fun loadUpcoming() {
         viewModelScope.launch {
+            setState { copy(upcoming = SectionUiState.Loading) }
             getUpcomingMovies().fold(
                 onSuccess = { movies -> setState { copy(upcoming = SectionUiState.Success(movies)) } },
                 onFailure = { error ->

@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -65,7 +67,7 @@ private fun HomeTabContent(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(JoyvieTheme.dimens.spacing.large),
     ) {
         JoyvieMovieSection(
@@ -101,6 +103,6 @@ private fun SectionUiState.toSectionItems(): List<MovieSectionItem> =
 private fun Movie.toSectionItem(): MovieSectionItem =
     MovieSectionItem(
         id = id,
-        imageUrl = "https://image.tmdb.org/t/p/w342$posterPath",
+        imageUrl = if (posterPath != null) "https://image.tmdb.org/t/p/w342$posterPath" else "",
         title = title,
     )

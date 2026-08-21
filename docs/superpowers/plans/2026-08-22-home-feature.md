@@ -739,7 +739,7 @@ and add `UPCOMING_PATH` to the companion object:
 - [ ] **Step 12: Run the full data test suite and verify all pass**
 
 Run: `./gradlew :feature:home:data:testAndroidHostTest`
-Expected: PASS (5 tests green).
+Expected: PASS (4 tests green).
 
 - [ ] **Step 13: Create the data Koin module aggregator**
 

@@ -275,7 +275,7 @@ class GetNowPlayingMoviesUseCaseTest : FunSpec({
 
 - [ ] **Step 5: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:domain:test --tests "*.GetNowPlayingMoviesUseCaseTest"`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest --tests "*.GetNowPlayingMoviesUseCaseTest"`
 Expected: FAIL — `GetNowPlayingMoviesUseCase` is unresolved (class doesn't exist yet).
 
 - [ ] **Step 6: Implement `GetNowPlayingMoviesUseCase`**
@@ -299,7 +299,7 @@ class GetNowPlayingMoviesUseCase(
 
 - [ ] **Step 7: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:domain:test --tests "*.GetNowPlayingMoviesUseCaseTest"`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest --tests "*.GetNowPlayingMoviesUseCaseTest"`
 Expected: PASS (2 tests green).
 
 - [ ] **Step 8: Write the failing test for `GetTopRatedMoviesUseCase`**
@@ -356,7 +356,7 @@ class GetTopRatedMoviesUseCaseTest : FunSpec({
 
 - [ ] **Step 9: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:domain:test --tests "*.GetTopRatedMoviesUseCaseTest"`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest --tests "*.GetTopRatedMoviesUseCaseTest"`
 Expected: FAIL — `GetTopRatedMoviesUseCase` is unresolved.
 
 - [ ] **Step 10: Implement `GetTopRatedMoviesUseCase`**
@@ -380,7 +380,7 @@ class GetTopRatedMoviesUseCase(
 
 - [ ] **Step 11: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:domain:test --tests "*.GetTopRatedMoviesUseCaseTest"`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest --tests "*.GetTopRatedMoviesUseCaseTest"`
 Expected: PASS (2 tests green).
 
 - [ ] **Step 12: Write the failing test for `GetUpcomingMoviesUseCase`**
@@ -437,7 +437,7 @@ class GetUpcomingMoviesUseCaseTest : FunSpec({
 
 - [ ] **Step 13: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:domain:test --tests "*.GetUpcomingMoviesUseCaseTest"`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest --tests "*.GetUpcomingMoviesUseCaseTest"`
 Expected: FAIL — `GetUpcomingMoviesUseCase` is unresolved.
 
 - [ ] **Step 14: Implement `GetUpcomingMoviesUseCase`**
@@ -461,7 +461,7 @@ class GetUpcomingMoviesUseCase(
 
 - [ ] **Step 15: Run the full domain test suite and verify all pass**
 
-Run: `./gradlew :feature:home:domain:test`
+Run: `./gradlew :feature:home:domain:testAndroidHostTest`
 Expected: PASS (6 tests green: 2 per use case).
 
 - [ ] **Step 16: Commit**
@@ -579,7 +579,7 @@ class HomeRepositoryImplTest : FunSpec({
 
 - [ ] **Step 2: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:data:test --tests "*.HomeRepositoryImplTest"`
+Run: `./gradlew :feature:home:data:testAndroidHostTest --tests "*.HomeRepositoryImplTest"`
 Expected: FAIL — `HomeRepositoryImpl` is unresolved (class doesn't exist yet).
 
 - [ ] **Step 3: Implement the mapper and `HomeRepositoryImpl` for `getNowPlayingMovies`**
@@ -641,7 +641,7 @@ class HomeRepositoryImpl(
 
 - [ ] **Step 4: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:data:test --tests "*.HomeRepositoryImplTest"`
+Run: `./gradlew :feature:home:data:testAndroidHostTest --tests "*.HomeRepositoryImplTest"`
 Expected: PASS (2 tests green).
 
 - [ ] **Step 5: Write the failing test for `getTopRatedMovies`**
@@ -661,7 +661,7 @@ Add to `HomeRepositoryImplTest.kt`, inside the same `FunSpec` block (after the t
 
 - [ ] **Step 6: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:data:test --tests "*.HomeRepositoryImplTest"`
+Run: `./gradlew :feature:home:data:testAndroidHostTest --tests "*.HomeRepositoryImplTest"`
 Expected: FAIL — `getTopRatedMovies should map response to domain movies` fails with `NotImplementedError` (`TODO`).
 
 - [ ] **Step 7: Implement `getTopRatedMovies`**
@@ -689,7 +689,7 @@ and add `TOP_RATED_PATH` to the companion object:
 
 - [ ] **Step 8: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:data:test --tests "*.HomeRepositoryImplTest"`
+Run: `./gradlew :feature:home:data:testAndroidHostTest --tests "*.HomeRepositoryImplTest"`
 Expected: PASS (3 tests green).
 
 - [ ] **Step 9: Write the failing test for `getUpcomingMovies`**
@@ -709,7 +709,7 @@ Add to `HomeRepositoryImplTest.kt`:
 
 - [ ] **Step 10: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:data:test --tests "*.HomeRepositoryImplTest"`
+Run: `./gradlew :feature:home:data:testAndroidHostTest --tests "*.HomeRepositoryImplTest"`
 Expected: FAIL — `getUpcomingMovies should map response to domain movies` fails with `NotImplementedError`.
 
 - [ ] **Step 11: Implement `getUpcomingMovies`**
@@ -738,7 +738,7 @@ and add `UPCOMING_PATH` to the companion object:
 
 - [ ] **Step 12: Run the full data test suite and verify all pass**
 
-Run: `./gradlew :feature:home:data:test`
+Run: `./gradlew :feature:home:data:testAndroidHostTest`
 Expected: PASS (5 tests green).
 
 - [ ] **Step 13: Create the data Koin module aggregator**
@@ -804,7 +804,7 @@ class HomeStateMachineTest : FunSpec({
 
 - [ ] **Step 2: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: FAIL — `HomeState`, `HomeTab`, `SectionUiState` are unresolved.
 
 - [ ] **Step 3: Implement `HomeContract.kt` (state shape + minimal `HomeEvent`)**
@@ -857,7 +857,7 @@ sealed interface HomeEffect : UiEffect
 
 - [ ] **Step 4: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (1 test green).
 
 - [ ] **Step 5: Create the presentation-side `FakeHomeRepository`**
@@ -979,7 +979,7 @@ class HomeStateMachineTest : FunSpec({
 
 - [ ] **Step 7: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: FAIL — `HomeStateMachine` is unresolved (class doesn't exist yet).
 
 - [ ] **Step 8: Implement minimal `HomeStateMachine` (success path only)**
@@ -1044,7 +1044,7 @@ class HomeStateMachine(
 
 - [ ] **Step 9: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (2 tests green).
 
 - [ ] **Step 10: Write the failing test for independent per-section failure**
@@ -1069,7 +1069,7 @@ Add to `HomeStateMachineTest.kt`, after the `"init loads all three sections to S
 
 - [ ] **Step 11: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: FAIL — `nowPlaying` state stays `Loading` (the `getOrThrow()` exception is never turned into `SectionUiState.Error`; the coroutine simply fails silently).
 
 - [ ] **Step 12: Implement proper success/failure handling for all three sections**
@@ -1117,7 +1117,7 @@ In `HomeStateMachine.kt`, replace the three `loadX` functions with:
 
 - [ ] **Step 13: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (3 tests green — the earlier success-path test still passes unchanged).
 
 - [ ] **Step 14: Write the failing test for `SelectTab`**
@@ -1145,7 +1145,7 @@ Add to `HomeStateMachineTest.kt`:
 
 - [ ] **Step 15: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: FAIL — compile error, `HomeEvent.SelectTab` is unresolved.
 
 - [ ] **Step 16: Implement `SelectTab`**
@@ -1173,7 +1173,7 @@ In `HomeStateMachine.kt`, add the branch to `onEvent`:
 
 - [ ] **Step 17: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (4 tests green).
 
 - [ ] **Step 18: Write the failing test for `RetryNowPlaying`**
@@ -1200,7 +1200,7 @@ Add to `HomeStateMachineTest.kt`:
 
 - [ ] **Step 19: Run the test and verify it fails**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: FAIL — compile error, `HomeEvent.RetryNowPlaying` is unresolved.
 
 - [ ] **Step 20: Implement `RetryNowPlaying`**
@@ -1219,7 +1219,7 @@ In `HomeStateMachine.kt`, add the branch:
 
 - [ ] **Step 21: Run the test and verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (5 tests green).
 
 - [ ] **Step 22: Write the failing test for `RetryLatest`**
@@ -1246,7 +1246,7 @@ Add to `HomeStateMachineTest.kt`:
 
 - [ ] **Step 23: Run the test, verify it fails, implement `RetryLatest`, verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"` — expect FAIL (`HomeEvent.RetryLatest` unresolved).
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"` — expect FAIL (`HomeEvent.RetryLatest` unresolved).
 
 In `HomeContract.kt`, add to `HomeEvent`:
 
@@ -1260,7 +1260,7 @@ In `HomeStateMachine.kt`, add the branch:
             HomeEvent.RetryLatest -> loadLatest()
 ```
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (6 tests green).
 
 - [ ] **Step 24: Write the failing test for `RetryUpcoming`**
@@ -1287,7 +1287,7 @@ Add to `HomeStateMachineTest.kt`:
 
 - [ ] **Step 25: Run the test, verify it fails, implement `RetryUpcoming`, verify it passes**
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"` — expect FAIL (`HomeEvent.RetryUpcoming` unresolved).
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"` — expect FAIL (`HomeEvent.RetryUpcoming` unresolved).
 
 In `HomeContract.kt`, add to `HomeEvent`:
 
@@ -1301,7 +1301,7 @@ In `HomeStateMachine.kt`, add the branch:
             HomeEvent.RetryUpcoming -> loadUpcoming()
 ```
 
-Run: `./gradlew :feature:home:presentation:test --tests "*.HomeStateMachineTest"`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest --tests "*.HomeStateMachineTest"`
 Expected: PASS (7 tests green).
 
 - [ ] **Step 26: Create the presentation Koin module aggregator**
@@ -1322,7 +1322,7 @@ class HomePresentationModule
 
 - [ ] **Step 27: Run the full presentation test suite and verify all pass**
 
-Run: `./gradlew :feature:home:presentation:test`
+Run: `./gradlew :feature:home:presentation:testAndroidHostTest`
 Expected: PASS (7 tests green).
 
 - [ ] **Step 28: Commit**

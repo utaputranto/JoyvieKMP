@@ -10,6 +10,7 @@ kotlin {
             api(libs.koin.test)
             api(libs.kotlinx.coroutines.test)
             api(libs.turbine)
+            api(libs.ktor.client.mock)
         }
 
         androidMain.dependencies {

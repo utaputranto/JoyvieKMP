@@ -11,6 +11,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.utaputranto.joyviekmp.feature.auth.presentation.navigation.authEntries
+import com.utaputranto.joyviekmp.feature.home.presentation.navigation.homeEntries
 import com.utaputranto.joyviekmp.feature.onboarding.api.navigation.SplashMainScreenRoute
 import com.utaputranto.joyviekmp.feature.onboarding.presentation.navigation.onboardingEntries
 
@@ -32,6 +33,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             entryProvider {
                 onboardingEntries(backStack, viewModelStoreOwner)
                 authEntries(backStack)
+                homeEntries(backStack)
             },
     )
 }

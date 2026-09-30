@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 
 data class AuthUiState(
     val email: String = "",
@@ -21,6 +22,7 @@ data class AuthUiState(
         get() = email.isNotBlank() && password.isNotBlank() && !isLoading && user == null
 }
 
+@KoinViewModel
 class AuthViewModel(
     private val login: LoginUseCase,
 ) : ViewModel() {

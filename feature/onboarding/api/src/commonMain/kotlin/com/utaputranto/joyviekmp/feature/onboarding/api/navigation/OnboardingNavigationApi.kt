@@ -1,25 +1,20 @@
 package com.utaputranto.joyviekmp.feature.onboarding.api.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-object OnboardingRoute
+data object SplashMainScreenRoute : NavKey
 
 @Serializable
-object OnboardingScreen1Route
+data object WelcomeMainScreenRoute : NavKey
 
-@Serializable
-object OnboardingScreen2Route
+fun MutableList<NavKey>.navigateToOnboarding() {
+    clear()
+    add(SplashMainScreenRoute)
+}
 
-fun NavController.navigateToOnboarding() {
-    val route = graph.findStartDestination().route
-    navigate(OnboardingRoute) {
-        if (route != null) {
-            popUpTo(route) {
-                inclusive = true
-            }
-        }
-    }
+fun MutableList<NavKey>.navigateToWelcome() {
+    remove(SplashMainScreenRoute)
+    add(WelcomeMainScreenRoute)
 }

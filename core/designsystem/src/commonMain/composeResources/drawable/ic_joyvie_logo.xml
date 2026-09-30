@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Cyan Background Container Box -->
+    <path
+        android:fillColor="#82E1FF"
+        android:pathData="M8,0 h48 a8,8 0 0 1 8,8 v48 a8,8 0 0 1 -8,8 h-48 a8,8 0 0 1 -8,-8 v-48 a8,8 0 0 1 8,-8 Z" />
+    <!-- 3 Slanted Film Strip Parallelograms (///) -->
+    <path
+        android:fillColor="#060D15"
+        android:pathData="M16,18 L24,18 L18,46 L10,46 Z M30,18 L38,18 L32,46 L24,46 Z M44,18 L52,18 L46,46 L38,46 Z" />
+</vector>

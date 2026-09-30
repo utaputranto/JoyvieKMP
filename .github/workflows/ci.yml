@@ -1,9 +1,14 @@
 name: Joyvie Kotlin Multiplatform CI
 
 on:
+  push:
+    branches:
+      - development
+      - main
   pull_request:
     branches:
       - development
+      - main
 
 jobs:
   build:
@@ -39,5 +44,5 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run CI Tasks (Spotless, Test, Assemble, Sonar)
-        run: ./gradlew spotlessCheck test assembleDebug sonar --continue
+      - name: Run CI Tasks (Spotless, Test, Kover Verify, Assemble, Sonar)
+        run: ./gradlew spotlessCheck test koverVerify assembleDebug sonar --continue

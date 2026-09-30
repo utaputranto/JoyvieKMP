@@ -8,10 +8,15 @@ internal actual fun writeLog(
     message: String,
     throwable: Throwable?,
 ) {
-    when (level) {
-        LogLevel.DEBUG -> Log.d(tag, message)
-        LogLevel.INFO -> Log.i(tag, message)
-        LogLevel.WARN -> Log.w(tag, message, throwable)
-        LogLevel.ERROR -> Log.e(tag, message, throwable)
+    runCatching {
+        when (level) {
+            LogLevel.DEBUG -> Log.d(tag, message)
+            LogLevel.INFO -> Log.i(tag, message)
+            LogLevel.WARN -> Log.w(tag, message, throwable)
+            LogLevel.ERROR -> Log.e(tag, message, throwable)
+        }
+    }.onFailure {
+        println("[$tag] $message")
+        throwable?.printStackTrace()
     }
 }

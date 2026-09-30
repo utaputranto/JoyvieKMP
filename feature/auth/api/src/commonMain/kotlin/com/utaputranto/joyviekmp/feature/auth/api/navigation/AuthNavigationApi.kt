@@ -1,25 +1,15 @@
 package com.utaputranto.joyviekmp.feature.auth.api.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-object AuthRoute
+data object AuthScreen1Route : NavKey
 
 @Serializable
-object AuthScreen1Route
+data object AuthScreen2Route : NavKey
 
-@Serializable
-object AuthScreen2Route
-
-fun NavController.navigateToAuth() {
-    val route = graph.findStartDestination().route
-    navigate(AuthRoute) {
-        if (route != null) {
-            popUpTo(route) {
-                inclusive = true
-            }
-        }
-    }
+fun MutableList<NavKey>.navigateToAuth() {
+    clear()
+    add(AuthScreen1Route)
 }
